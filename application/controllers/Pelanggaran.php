@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+ 
 defined('BASEPATH') or exit('');
 
 class Pelanggaran extends CI_Controller{
@@ -20,11 +20,11 @@ class Pelanggaran extends CI_Controller{
         $data['judul_halaman']='Pelanggaran';
         $data['jenis_pelanggaran']=$this->m_point_pelanggaran->select('jenis_pelanggaran','*','','id_jenis_pelanggaran','asc')->result();
         $data['pelanggaran']=$this->m_point_pelanggaran->select('pelanggaran,jenis_pelanggaran','*','jenis_pelanggaran.id_jenis_pelanggaran=pelanggaran.id_jenis_pelanggaran','id_pelanggaran','asc')->result();
-        $this->load->view('super_admin/header',$data);
-        $this->load->view('super_admin/sidebar');
+        $this->load->view('guru/header',$data);
+        $this->load->view('guru/sidebar');
         
-        $this->load->view('super_admin/pelanggaran/pelanggaran');
-        $this->load->view('super_admin/footer');
+        $this->load->view('guru/pelanggaran/pelanggaran');
+        $this->load->view('guru/footer');
     }
 
     public function tambah(){

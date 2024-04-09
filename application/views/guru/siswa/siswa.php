@@ -1,12 +1,4 @@
 <div class="page-heading">
-    <div class="page-title mb-2">
-        <div class="row">
-            <div class="col-12">
-                <h3>Pelanggaran Siswa</h3>
-            </div>
-        </div>
-    </div>
-
     <section class="section">
         <div class="row">
             <div class="col-md-12">
@@ -81,22 +73,17 @@
                                         <?php
                                         $no = 1;
                                         foreach ($siswa as $k) {
-                                            if ($k->jumlah_point == null or $k->jumlah_point == 0) {
-                                                $jumlah_point = 0;
-                                            } else {
-                                                $jumlah_point = $k->jumlah_point;
-                                            }
                                         ?>
                                             <tr>
                                                 <td><?php echo $no; ?></td>
                                                 <td><?php echo $k->nama_siswa; ?></td>
                                                 <td><?php echo $k->no_induk; ?></td>
                                                 <td><?php echo $k->nama_kelas; ?></td>
-                                                <td><?php echo $jumlah_point; ?></td>
+                                                <td><?php echo $k->jumlah_point; ?></td>
                                                 <td>
                                                     <?php
-                                                    foreach ($ketentuan as $kp) {
-                                                        if ($jumlah_point >= $kp->point_pelanggaran_rendah and $jumlah_point <= $kp->point_pelanggaran_tinggi) {
+                                                    foreach ($ketentuan_point as $kp) {
+                                                        if ($k->jumlah_point >= $kp->point_pelanggaran_rendah and $k->jumlah_point <= $kp->point_pelanggaran_tinggi) {
                                                             echo $kp->nama_ketentuan;
                                                         } else {
                                                             echo " ";

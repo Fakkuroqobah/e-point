@@ -1,12 +1,4 @@
 <div class="page-heading">
-    <div class="page-title mb-2">
-        <div class="row">
-            <div class="col-12">
-                <h3>Laporan</h3>
-            </div>
-        </div>
-    </div>
-
     <section class="section">
         <div class="row">
             <div class="col-sm-12">
@@ -54,7 +46,7 @@
                                             <th>No Induk</th>
                                             <th>Kelas</th>
                                             <th>Jumlah Point</th>
-                                            <th>Keputusan</th>
+                                            <th>Opsi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -74,15 +66,8 @@
                                                 <td><?php echo $k->nama_kelas; ?></td>
                                                 <td><?php echo $jumlah_point; ?></td>
                                                 <td>
-                                                    <?php
-                                                    foreach ($ketentuan as $kp) {
-                                                        if ($jumlah_point >= $kp->point_pelanggaran_rendah and $jumlah_point <= $kp->point_pelanggaran_tinggi) {
-                                                            echo $kp->nama_ketentuan;
-                                                        } else {
-                                                            echo " ";
-                                                        }
-                                                    }
-                                                    ?>
+                                                    <a href="<?php echo base_url(); ?>pelanggaran_siswa/hasil_input/<?php echo $k->id_siswa; ?>" class="btn btn-xs btn-primary">lihat</a>
+
                                                 </td>
                                             </tr>
                                         <?php $no++;

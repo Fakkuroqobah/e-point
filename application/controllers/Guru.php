@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+ 
 defined('BASEPATH') or exit('');
 
 class Guru extends CI_Controller{
@@ -19,11 +19,11 @@ class Guru extends CI_Controller{
     public function index(){
         $data['judul_halaman']='Guru';
         $data['guru']=$this->m_point_pelanggaran->select('guru','*','','id_guru','asc')->result();
-        $this->load->view('super_admin/header',$data);
-        $this->load->view('super_admin/sidebar');
+        $this->load->view('guru/header',$data);
+        $this->load->view('guru/sidebar');
         
-        $this->load->view('super_admin/guru/guru');
-        $this->load->view('super_admin/footer');
+        $this->load->view('guru/guru/guru');
+        $this->load->view('guru/footer');
     }
 
     public function tambah(){

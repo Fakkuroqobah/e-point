@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+ 
 defined('BASEPATH') or exit('');
 
 class Siswa extends CI_Controller{
@@ -25,11 +25,11 @@ class Siswa extends CI_Controller{
         }
         $data['siswa']=$this->m_point_pelanggaran->select('kelas,siswa,guru','*',"kelas.id_wali_kelas=guru.id_guru and kelas.id_kelas=siswa.id_kelas and siswa.id_kelas='$id_kelas'",'siswa.id_kelas','asc')->result();
         $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
-        $this->load->view('super_admin/header',$data);
-        $this->load->view('super_admin/sidebar');
+        $this->load->view('guru/header',$data);
+        $this->load->view('guru/sidebar');
         
-        $this->load->view('super_admin/siswa/siswa');
-        $this->load->view('super_admin/footer');
+        $this->load->view('guru/siswa/siswa');
+        $this->load->view('guru/footer');
     }
 
     public function cari_kelas(){
@@ -41,11 +41,11 @@ class Siswa extends CI_Controller{
             $data['nama_kelas']=$dk->nama_kelas;
         }
         $data['id_kelas']=$kelas;
-        $this->load->view('super_admin/header',$data);
-        $this->load->view('super_admin/sidebar');
+        $this->load->view('guru/header',$data);
+        $this->load->view('guru/sidebar');
         
-        $this->load->view('super_admin/siswa/siswa');
-        $this->load->view('super_admin/footer');
+        $this->load->view('guru/siswa/siswa');
+        $this->load->view('guru/footer');
     }
 
     public function tambah(){

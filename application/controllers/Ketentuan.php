@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+ 
 defined('BASEPATH') or exit('');
 
 class Ketentuan extends CI_Controller{
@@ -19,11 +19,11 @@ class Ketentuan extends CI_Controller{
     public function index(){
         $data['judul_halaman']='Ketentuan';
         $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','asc')->result();
-        $this->load->view('super_admin/header',$data);
-        $this->load->view('super_admin/sidebar');
+        $this->load->view('guru/header',$data);
+        $this->load->view('guru/sidebar');
         
-        $this->load->view('super_admin/ketentuan/ketentuan');
-        $this->load->view('super_admin/footer');
+        $this->load->view('guru/ketentuan/ketentuan');
+        $this->load->view('guru/footer');
     }
 
     public function tambah(){

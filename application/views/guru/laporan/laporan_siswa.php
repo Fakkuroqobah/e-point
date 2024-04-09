@@ -1,22 +1,14 @@
 <div class="page-heading">
-    <div class="page-title mb-2">
-        <div class="row">
-            <div class="col-12">
-                <h3>Laporan</h3>
-            </div>
-        </div>
-    </div>
-
     <section class="section">
         <div class="row">
-        <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Cari Laporan</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="<?php echo base_url(); ?>laporan_guru/cari_kelas" method="post">
+                            <form action="<?php echo base_url(); ?>laporan/cari_kelas" method="post">
                                 <div class="form-group">
                                     <label for="kelas" class="form-label">Nama Kelas:</label>
                                     <select class="selectpicker form-control" name="kelas" required>
@@ -37,7 +29,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Laporan Pelanggaran Siswa</h4>
+                        <h4 class="card-title">Laporan Rekap Pelanggaran Siswa</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -70,6 +62,9 @@
                             <?php
                             }
                             ?>
+                            <?php if(isset($nama_kelas)) : ?>
+                                <div class="text-left">Laporan Pelanggaran Siswa Kelas <?php echo $nama_kelas; ?></div>
+                            <?php endif; ?>
                             <div class="table-responsive" style="padding-top:20px;">
                                 <table class="table" id="datatables8">
                                     <thead>

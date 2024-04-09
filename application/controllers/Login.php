@@ -8,7 +8,6 @@ class Login extends CI_Controller{
         parent::__construct();
         $this->load->database();
         $this->load->model('m_point_pelanggaran');
-        // $this->load->model('m_klinik');
         // if($this->session->userdata('status')!='login'){
         //     redirect('login/index');
         // }
@@ -17,7 +16,7 @@ class Login extends CI_Controller{
 
     public function index(){
         $data['judul_halaman']="Utama";
-        $this->load->view('super_admin/login/login');
+        $this->load->view('guru/login/login');
     }
 
     public function verification(){
@@ -25,17 +24,17 @@ class Login extends CI_Controller{
             'username'=>$this->input->post('username'),
             'password'=>$this->input->post('password')
             );
-        $cek=$this->m_point_pelanggaran->select('admin','*',$where,'id_admin','asc')->num_rows();
+        $cek=$this->m_point_pelanggaran->select('guru','*',$where,'id_guru','asc')->num_rows();
         if($cek > 0){
-            $akun=$this->m_point_pelanggaran->select('admin','*',$where,'id_admin','asc')->result();
+            $akun=$this->m_point_pelanggaran->select('guru','*',$where,'id_guru','asc')->result();
             foreach($akun as $a){
-                $id_admin=$a->id_admin;
-                $nama=$a->nama_admin;
+                $id_guru=$a->id_guru;
+                $nama=$a->nama_guru;
                 $user=$a->username;
                 $pass=$a->password;
             }
             $data_session = array(
-                            'id_akun'=>$id_admin,
+                            'id_akun'=>$id_guru,
                             'nama_akun'=>$nama,
                             'username'=>$user,
                             'password'=>$pass,
@@ -43,12 +42,13 @@ class Login extends CI_Controller{
                             );
             $this->session->set_userdata($data_session);
             $this->session->set_userdata('pesan_aktifitas','b');
-            redirect('dashboard/index');
+            redirect('aktifitas_guru/pilihan');
         }else{
             $this->session->set_userdata('pesan_aktifitas','t');
-            redirect('dashboard/index');
+            redirect('aktifitas_guru/pilihan');
         }
     }
+
     public function logout(){
         $this->session->userdata('username')==' ';
         $this->session->userdata('password')==' ';
@@ -56,8 +56,5 @@ class Login extends CI_Controller{
         $this->session->sess_destroy();
         redirect('login/index');
     }
-
     
 }
-
-?>

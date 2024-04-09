@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+ 
 defined('BASEPATH') or exit('');
 
 class Jenis_pelanggaran extends CI_Controller{
@@ -19,11 +19,11 @@ class Jenis_pelanggaran extends CI_Controller{
     public function index(){
         $data['judul_halaman']='Jenis Pelanggaran';
         $data['jenis_pelanggaran']=$this->m_point_pelanggaran->select('jenis_pelanggaran','*','','id_jenis_pelanggaran','asc')->result();
-        $this->load->view('super_admin/header',$data);
-        $this->load->view('super_admin/sidebar');
+        $this->load->view('guru/header',$data);
+        $this->load->view('guru/sidebar');
         
-        $this->load->view('super_admin/jenis_pelanggaran/jenis_pelanggaran');
-        $this->load->view('super_admin/footer');
+        $this->load->view('guru/jenis_pelanggaran/jenis_pelanggaran');
+        $this->load->view('guru/footer');
     }
 
     public function tambah(){

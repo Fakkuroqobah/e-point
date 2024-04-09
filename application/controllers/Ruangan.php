@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+ 
 defined('BASEPATH') or exit('');
 
 class Ruangan extends CI_Controller{
@@ -19,21 +19,21 @@ class Ruangan extends CI_Controller{
     public function index(){
         $data['judul_halaman']='Ruangan';
         $data['ruangan']=$this->m_inventaris->select('ruangan','*','','kode_ruangan','asc')->result();
-        $this->load->view('super_admin/header',$data);
-        $this->load->view('super_admin/sidebar');
+        $this->load->view('guru/header',$data);
+        $this->load->view('guru/sidebar');
         
-        $this->load->view('super_admin/ruangan/ruangan');
-        $this->load->view('super_admin/footer');
+        $this->load->view('guru/ruangan/ruangan');
+        $this->load->view('guru/footer');
     }
 
     public function import(){
         $data['judul_halaman']='Ruangan';
         $data['ruangan']=$this->m_inventaris->select('ruangan','*','','kode_ruangan','asc')->result();
-        $this->load->view('super_admin/header',$data);
-        $this->load->view('super_admin/sidebar');
+        $this->load->view('guru/header',$data);
+        $this->load->view('guru/sidebar');
         
-        $this->load->view('super_admin/ruangan/import');
-        $this->load->view('super_admin/footer');
+        $this->load->view('guru/ruangan/import');
+        $this->load->view('guru/footer');
     }
 
     public function tambah(){

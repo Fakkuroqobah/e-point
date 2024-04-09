@@ -1,12 +1,4 @@
 <div class="page-heading">
-    <div class="page-title mb-2">
-        <div class="row">
-            <div class="col-12">
-                <h3>Laporan</h3>
-            </div>
-        </div>
-    </div>
-
     <section class="section">
         <div class="row">
             <div class="col-sm-12">
@@ -45,7 +37,7 @@
                             <?php
                             }
                             ?>
-                            <?php if(!is_null($nama_kelas)) : ?>
+                            <?php if(isset($nama_kelas)) : ?>
                                 <div class="text-left">Laporan Pelanggaran Siswa Kelas <?php echo $nama_kelas; ?></div>
                             <?php endif; ?>
                             <div class="text-left">Laporan Pelanggaran Siswa berdasarkan " <?php echo $nama_pelanggaran; ?>"</div>
@@ -62,7 +54,6 @@
                                             <th>Tanggal Pelanggaran</th>
                                             <th>Pelanggaran</th>
                                             <th>Nama Pelapor</th>
-                                            <th>Level Pelapor</th>
                                             <th>Point</th>
                                         </tr>
                                     </thead>
@@ -81,24 +72,14 @@
                                                 <td><?php echo $p->nama_pelanggaran; ?></td>
                                                 <td>
                                                     <?php
-                                                    if ($p->level_pelapor == 'guru') {
-                                                        foreach ($guru as $g) {
-                                                            if ($g->id_guru == $p->id_pelapor) {
-                                                                echo $g->nama_guru;
-                                                                break;
-                                                            }
-                                                        }
-                                                    } elseif ($p->level_pelapor == 'gds') {
-                                                        foreach ($gds as $gd) {
-                                                            if ($gd->id_admin == $p->id_pelapor) {
-                                                                echo $g->nama_admin;
-                                                                break;
-                                                            }
+                                                    foreach ($guru as $g) {
+                                                        if ($g->id_guru == $p->id_pelapor) {
+                                                            echo $g->nama_guru;
+                                                            break;
                                                         }
                                                     }
                                                     ?>
                                                 </td>
-                                                <td><?php echo $p->level_pelapor; ?></td>
                                                 <td><?php echo $p->point; ?></td>
                                             </tr>
                                         <?php $no++;
@@ -126,7 +107,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </div>
-            <form action="<?php echo base_url(); ?>laporan_guru/pelanggaran" method="get">
+            <form action="<?php echo base_url(); ?>laporan/pelanggaran" method="get">
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="form-group">

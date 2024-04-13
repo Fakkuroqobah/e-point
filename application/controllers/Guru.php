@@ -96,7 +96,7 @@ class Guru extends CI_Controller{
 			{
 				$highestRow = $worksheet->getHighestRow();
                 $highestColumn = $worksheet->getHighestColumn();
-                $no=1;
+                $no=0;
 				for($row=3; $row<=$highestRow; $row++)
 				{
 					$nama_guru = $worksheet->getCellByColumnAndRow(1, $row)->getValue();

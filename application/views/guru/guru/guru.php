@@ -114,7 +114,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Username:</label>
-                        <input type="text" class="form-control" id="" name="usename" required>
+                        <input type="text" class="form-control" id="" name="username" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Password:</label>

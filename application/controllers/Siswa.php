@@ -52,13 +52,15 @@ class Siswa extends CI_Controller{
         $nama=$this->input->post('nama');
         $nis=$this->input->post('nis');
         $alamat=$this->input->post('alamat');
+        $jenis_kelamin=$this->input->post('jenis_kelamin');
         $kelas=$this->input->post('kelas');
         $tanggal_input=date('Y-m-d H:i:s');
         $nilai=array(
             'id_siswa'=>'',
             'nama_siswa'=>$nama,
-            'nis'=>$nis,
+            'no_induk'=>$nis,
             'alamat'=>$alamat,
+            'jenis_kelamin'=>$jenis_kelamin,
             'id_kelas'=>$kelas,
             'tanggal_input'=>$tanggal_input
         );
@@ -72,11 +74,13 @@ class Siswa extends CI_Controller{
         $nama=$this->input->post('nama');
         $nis=$this->input->post('nis');
         $alamat=$this->input->post('alamat');
+        $jenis_kelamin=$this->input->post('jenis_kelamin');
         $kelas=$this->input->post('kelas');
         $nilai=array(
             'nama_siswa'=>$nama,
-            'nis'=>$nis,
+            'no_induk'=>$nis,
             'alamat'=>$alamat,
+            'jenis_kelamin'=>$jenis_kelamin,
             'id_kelas'=>$kelas,
         );
         $where=array(

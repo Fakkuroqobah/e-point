@@ -103,7 +103,7 @@
                                                 <td><?php echo $k->nama_kelas; ?></td>
                                                 <td><?php echo $jumlah_point; ?></td>
                                                 <td>
-                                                    <a href="<?php echo base_url(); ?>pelanggaran_siswa/hasil_input/<?php echo $k->id_siswa; ?>" class="btn btn-xs btn-primary">lihat</a>
+                                                    <a href="<?php echo base_url(); ?>pelanggaran_siswa_guru/hasil_input/<?php echo $k->id_siswa; ?>" class="btn btn-xs btn-primary">lihat</a>
 
                                                 </td>
                                             </tr>

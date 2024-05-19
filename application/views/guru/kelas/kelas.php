@@ -39,7 +39,6 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Kelas</th>
-                                            <th>Nama Wali Kelas</th>
                                             <th>Opsi</th>
                                         </tr>
                                     </thead>
@@ -51,7 +50,6 @@
                                             <tr>
                                                 <td><?php echo $no; ?></td>
                                                 <td><?php echo $k->nama_kelas; ?></td>
-                                                <td><?php echo $k->nama_guru; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url(); ?>kelas/hapus/<?php echo $k->id_kelas; ?>" class="btn btn-xs btn-danger">hapus</a>
                                                     <button class="btn btn-xs btn-warning view_detail" relid="<?php echo $k->id_kelas;  ?>">edit</button>
@@ -90,16 +88,6 @@
                         <label for="email">Nama Kelas:</label>
                         <input type="text" class="form-control" id="" name="nama" required>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Nama Wali Kelas:</label>
-                        <select class="form-control" name="wali_kelas" required>
-                            <option>-- pilih wali kelas --</option>
-                            <?php foreach ($guru as $g) { ?>
-                                <option value="<?php echo $g->id_guru; ?>"><?php echo $g->nama_guru; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -133,15 +121,6 @@
                         <input type="text" class="form-control" id="nama" name="nama" required>
                         <input type="hidden" class="form-control" id="id_kelas" name="id_kelas" required>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Nama Wali Kelas:</label>
-                        <select class="form-control" name="wali_kelas" id="wali_kelas" required>
-                            <option>-- pilih wali kelas --</option>
-                            <?php foreach ($guru as $g) { ?>
-                                <option value="<?php echo $g->id_guru; ?>"><?php echo $g->nama_guru; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -171,8 +150,7 @@
                 success: function(response) {
                     $.each(response, function(i, item) {
                         $('#id_kelas').val(response[i].id_kelas);
-                        $('#nama').val(response[i].nama_kelas); //hold the response in id and show on popup
-                        $('#wali_kelas').val(response[i].id_wali_kelas);
+                        $('#nama').val(response[i].nama_kelas);
                         $("#modal_edit").modal('show');
                     });
                 }

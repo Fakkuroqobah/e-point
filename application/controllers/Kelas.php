@@ -18,8 +18,7 @@ class Kelas extends CI_Controller{
 
     public function index(){
         $data['judul_halaman']='Kelas';
-        $data['kelas']=$this->m_point_pelanggaran->select('kelas,guru','*','kelas.id_wali_kelas=guru.id_guru','kelas.id_kelas','asc')->result();
-        $data['guru']=$this->m_point_pelanggaran->select('guru','*','','id_guru','asc')->result();
+        $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','kelas.id_kelas','asc')->result();
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
         
@@ -29,11 +28,9 @@ class Kelas extends CI_Controller{
 
     public function tambah(){
         $nama=$this->input->post('nama');
-        $wali_kelas=$this->input->post('wali_kelas');
         $nilai=array(
             'id_kelas'=>'',
-            'nama_kelas'=>$nama,
-            'id_wali_kelas'=>$wali_kelas
+            'nama_kelas'=>$nama
         );
         $this->m_point_pelanggaran->insert('kelas',$nilai);
         $this->session->set_userdata('pesan','t');
@@ -43,10 +40,8 @@ class Kelas extends CI_Controller{
     public function edit(){
         $id=$this->input->post('id_kelas');
         $nama=$this->input->post('nama');
-        $wali_kelas=$this->input->post('wali_kelas');
         $nilai=array(
-            'nama_kelas'=>$nama,
-            'id_wali_kelas'=>$wali_kelas
+            'nama_kelas'=>$nama
         );
         $where=array(
             'id_kelas'=>$id
@@ -69,7 +64,7 @@ class Kelas extends CI_Controller{
 
     function get_data_kelas_edit(){
         $id_kelas = $this->input->get('id');
-        $get_kelas = $this->m_point_pelanggaran->select('kelas,guru','*',"guru.id_guru=kelas.id_wali_kelas and kelas.id_kelas='$id_kelas'",'kelas.id_kelas ','desc')->result();
+        $get_kelas = $this->m_point_pelanggaran->select('kelas','*',"kelas.id_kelas='$id_kelas'",'kelas.id_kelas ','desc')->result();
         echo json_encode($get_kelas); 
         
     }

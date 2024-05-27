@@ -179,7 +179,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="email">Kelas :</label>
-                        <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" name="kelas" required>
+                        <select class="form-control selectpicker-modal-import" data-show-subtext="true" data-live-search="true" name="kelas" required>
                             <option>-- pilih kelas --</option>
                             <?php
                             foreach ($kelas as $k) {

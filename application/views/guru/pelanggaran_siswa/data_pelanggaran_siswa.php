@@ -16,7 +16,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="<?php echo base_url(); ?>pelanggaran_siswa/cari_kelas" method="post">
+                            <form action="<?php echo base_url(); ?>pelanggaran_siswa_guru/cari_kelas" method="post">
                                 <div class="form-group">
                                     <label for="kelas" class="form-label">Nama Kelas:</label>
                                     <select class="selectpicker form-control" name="kelas" required>
@@ -41,9 +41,6 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <button data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-sm btn-primary">Tambah</button>
-                            <button data-bs-toggle="modal" data-bs-target="#import" class="btn btn-sm btn-primary">Import data</button>
-                            <a href="<?php echo base_url(); ?>siswa/download_file" class="btn btn-sm btn-primary">Download Format Import data</a>
                             <?php
                             if ($this->session->userdata('pesan') == true) {
                                 if ($this->session->userdata('pesan') == 't') {

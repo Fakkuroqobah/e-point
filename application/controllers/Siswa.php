@@ -23,7 +23,7 @@ class Siswa extends CI_Controller{
             $id_kelas=$dk->id_kelas;
             $data['nama_kelas']=$dk->nama_kelas;
         }
-        $data['siswa']=$this->m_point_pelanggaran->select('kelas,siswa,guru','*',"kelas.id_kelas=siswa.id_kelas and siswa.id_kelas='$id_kelas'",'siswa.id_kelas','asc')->result();
+        $data['siswa']=$this->m_point_pelanggaran->select('kelas,siswa','*',"kelas.id_kelas=siswa.id_kelas and siswa.id_kelas='$id_kelas'",'siswa.id_kelas','asc')->result();
         $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
@@ -35,7 +35,7 @@ class Siswa extends CI_Controller{
     public function cari_kelas(){
         $kelas=$this->input->post('kelas');
         $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
-        $data['siswa']=$this->m_point_pelanggaran->select('kelas,siswa,guru','*',"kelas.id_kelas=siswa.id_kelas and siswa.id_kelas='$kelas'",'siswa.id_kelas','asc')->result();
+        $data['siswa']=$this->m_point_pelanggaran->select('kelas,siswa','*',"kelas.id_kelas=siswa.id_kelas and siswa.id_kelas='$kelas'",'siswa.id_kelas','asc')->result();
         $data_kelas=$this->m_point_pelanggaran->select('kelas','*',"id_kelas='$kelas'",'id_kelas','asc')->result();
         foreach($data_kelas as $dk){
             $data['nama_kelas']=$dk->nama_kelas;

@@ -57,7 +57,7 @@
                     <i class="bi bi-people" aria-hidden="true"></i><span>Aktifitas</span></a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="<?php echo base_url();?>siswa_guru/index" class='sidebar-link'>
+                    <a href="<?php echo base_url();?>pelanggaran_siswa_guru/data_siswa" class='sidebar-link'>
                     <i class="bi bi-person-badge" aria-hidden="true"></i><span>Pelanggaran Siswa</span></a>
                 </li>
                 <li class="sidebar-item">

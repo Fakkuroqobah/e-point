@@ -31,6 +31,7 @@ function readURL(input) {
 <script type="text/javascript">
 $(document).ready(function() {
     $('.selectpicker-modal').select2({ width: '100%', dropdownParent: $("#myModal") });
+    $('.selectpicker-modal-import').select2({ width: '100%', dropdownParent: $("#import") });
     $('.selectpicker').select2({ width: '100%' });
 
     $('#datatables8').DataTable({

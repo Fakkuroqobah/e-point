@@ -18,7 +18,45 @@ class Laporan_guru extends CI_Controller{
 
     public function index(){
         $data['judul_halaman']='Laporan';
-        $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','desc')->result();
+        // $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','desc')->result();
+        $data['ketentuan'] = [
+            [
+                'id_ketentuan_point' => 1,
+                'nama_ketentuan' => 'peringatan ke 1 ( oleh wali kelas )',
+                'point_pelanggaran_rendah' => 10,
+                'point_pelanggaran_tinggi' => 30,
+            ],
+            [
+                'id_ketentuan_point' => 2,
+                'nama_ketentuan' => 'peringatan ke 2 ( wali kelas dan K3 )',
+                'point_pelanggaran_rendah' => 26,
+                'point_pelanggaran_tinggi' => 45,
+            ],
+            [
+                'id_ketentuan_point' => 3,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 1 ( oleh wali kelas )',
+                'point_pelanggaran_rendah' => 41,
+                'point_pelanggaran_tinggi' => 75,
+            ],
+            [
+                'id_ketentuan_point' => 4,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 2 (  Wali Kelas dan guru BK )',
+                'point_pelanggaran_rendah' => 76,
+                'point_pelanggaran_tinggi' => 100,
+            ],
+            [
+                'id_ketentuan_point' => 5,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 3 ( Wali Kelas, Guru, BK dan K3 )',
+                'point_pelanggaran_rendah' => 101,
+                'point_pelanggaran_tinggi' => 200,
+            ],
+            [
+                'id_ketentuan_point' => 6,
+                'nama_ketentuan' => 'Dikembalikan ke orang tua ( Kepala Sekolah )',
+                'point_pelanggaran_rendah' => 201,
+                'point_pelanggaran_tinggi' => 500,
+            ],
+        ];
         $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_tertinggi('10')->result();
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
@@ -29,7 +67,45 @@ class Laporan_guru extends CI_Controller{
 
     public function siswa(){
         $data['judul_halaman']='Laporan';
-        $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','desc')->result();
+        // $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','desc')->result();
+        $data['ketentuan'] = [
+            [
+                'id_ketentuan_point' => 1,
+                'nama_ketentuan' => 'peringatan ke 1 ( oleh wali kelas )',
+                'point_pelanggaran_rendah' => 10,
+                'point_pelanggaran_tinggi' => 30,
+            ],
+            [
+                'id_ketentuan_point' => 2,
+                'nama_ketentuan' => 'peringatan ke 2 ( wali kelas dan K3 )',
+                'point_pelanggaran_rendah' => 26,
+                'point_pelanggaran_tinggi' => 45,
+            ],
+            [
+                'id_ketentuan_point' => 3,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 1 ( oleh wali kelas )',
+                'point_pelanggaran_rendah' => 41,
+                'point_pelanggaran_tinggi' => 75,
+            ],
+            [
+                'id_ketentuan_point' => 4,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 2 (  Wali Kelas dan guru BK )',
+                'point_pelanggaran_rendah' => 76,
+                'point_pelanggaran_tinggi' => 100,
+            ],
+            [
+                'id_ketentuan_point' => 5,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 3 ( Wali Kelas, Guru, BK dan K3 )',
+                'point_pelanggaran_rendah' => 101,
+                'point_pelanggaran_tinggi' => 200,
+            ],
+            [
+                'id_ketentuan_point' => 6,
+                'nama_ketentuan' => 'Dikembalikan ke orang tua ( Kepala Sekolah )',
+                'point_pelanggaran_rendah' => 201,
+                'point_pelanggaran_tinggi' => 500,
+            ],
+        ];
         $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
         $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_tertinggi('10')->result();
         $this->load->view('guru/header',$data);
@@ -42,7 +118,45 @@ class Laporan_guru extends CI_Controller{
 
     public function cari_kelas(){
         $kelas=$this->input->post('kelas');
-        $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','desc')->result();
+        // $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','desc')->result();
+        $data['ketentuan'] = [
+            [
+                'id_ketentuan_point' => 1,
+                'nama_ketentuan' => 'peringatan ke 1 ( oleh wali kelas )',
+                'point_pelanggaran_rendah' => 10,
+                'point_pelanggaran_tinggi' => 30,
+            ],
+            [
+                'id_ketentuan_point' => 2,
+                'nama_ketentuan' => 'peringatan ke 2 ( wali kelas dan K3 )',
+                'point_pelanggaran_rendah' => 26,
+                'point_pelanggaran_tinggi' => 45,
+            ],
+            [
+                'id_ketentuan_point' => 3,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 1 ( oleh wali kelas )',
+                'point_pelanggaran_rendah' => 41,
+                'point_pelanggaran_tinggi' => 75,
+            ],
+            [
+                'id_ketentuan_point' => 4,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 2 (  Wali Kelas dan guru BK )',
+                'point_pelanggaran_rendah' => 76,
+                'point_pelanggaran_tinggi' => 100,
+            ],
+            [
+                'id_ketentuan_point' => 5,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 3 ( Wali Kelas, Guru, BK dan K3 )',
+                'point_pelanggaran_rendah' => 101,
+                'point_pelanggaran_tinggi' => 200,
+            ],
+            [
+                'id_ketentuan_point' => 6,
+                'nama_ketentuan' => 'Dikembalikan ke orang tua ( Kepala Sekolah )',
+                'point_pelanggaran_rendah' => 201,
+                'point_pelanggaran_tinggi' => 500,
+            ],
+        ];
         $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
         $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_kelas($kelas)->result();
         $data_kelas=$this->m_point_pelanggaran->select('kelas','*',"id_kelas='$kelas'",'id_kelas','asc')->result();

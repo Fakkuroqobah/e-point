@@ -96,9 +96,11 @@
                                                 <td>
                                                     <?php
                                                     foreach ($ketentuan as $kp) {
-                                                        if ($jumlah_point >= $kp->point_pelanggaran_rendah and $jumlah_point <= $kp->point_pelanggaran_tinggi) {
-                                                            echo $kp->nama_ketentuan;
-                                                        } else {
+                                                        if ($jumlah_point >= $kp['point_pelanggaran_rendah'] and $jumlah_point <= $kp['point_pelanggaran_tinggi']) {
+                                                            echo $kp['nama_ketentuan'];
+                                                        }else if($jumlah_point >= 500) {
+                                                            $ketentuana = 'Dikembalikan ke orang tua ( Kepala Sekolah )';
+                                                        }else {
                                                             echo " ";
                                                         }
                                                     }

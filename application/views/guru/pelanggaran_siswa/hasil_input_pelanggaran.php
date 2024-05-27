@@ -45,12 +45,11 @@
                                         $id_kelas = $s->id_kelas;
                                     ?>
                                         <?php
-                                        $ketentuan = null;
-                                        foreach ($ketentuan_point as $kp) {
-                                            if ($s->jumlah_point >= $kp->point_pelanggaran_rendah and $s->jumlah_point <= $kp->point_pelanggaran_tinggi) {
-                                                $ketentuan = $kp->nama_ketentuan;
+                                        foreach ($ketentuan as $kp) {
+                                            if ($s->jumlah_point >= $kp['point_pelanggaran_rendah'] and $s->jumlah_point <= $kp['point_pelanggaran_tinggi']) {
+                                                $ketentuana = $kp['nama_ketentuan'];
                                             }else if($s->jumlah_point >= 500) {
-                                                $ketentuan = 'Dikembalikan ke orang tua ( Kepala Sekolah )';
+                                                $ketentuana = 'Dikembalikan ke orang tua ( Kepala Sekolah )';
                                             }
                                         }
                                         ?>
@@ -58,7 +57,7 @@
                                         No Induk Siswa : <?php echo $s->no_induk; ?><br>
                                         Kelas Siswa : <?php echo $s->nama_kelas; ?><br>
                                         Total Point Pelanggaran : <?php echo $s->jumlah_point; ?><br>
-                                        Keputusan Pelanggaran : <?php echo $ketentuan ?? '-'; ?>
+                                        Keputusan Pelanggaran : <?php echo $ketentuana ?? '-'; ?>
                                     <?php } ?>
                                 </p>
                             </div>

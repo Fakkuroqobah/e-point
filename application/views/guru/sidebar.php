@@ -45,11 +45,6 @@
                                 <i class="me-3 bi bi-exclamation-triangle" aria-hidden="true"></i><span>Pelanggaran</span>
                             </a>
                         </li>
-                        <li class="submenu-item">
-                            <a href="<?php echo base_url();?>ketentuan/index" class='submenu-link d-flex'>
-                                <i class="me-3 bi bi-question-octagon" aria-hidden="true"></i><span>Ketentuan</span>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <li class="sidebar-item">

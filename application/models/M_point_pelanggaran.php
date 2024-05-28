@@ -210,5 +210,14 @@ class M_point_pelanggaran extends CI_Model{
         $this->db->group_by("siswa.id_siswa");
         return $this->db->get();
     }
+
+    // API
+    function jumlah_point_siswa($id) {
+        $this->db->select("SUM(point) AS jumlah_point");
+        $this->db->from("pelanggaran_siswa");
+        $this->db->where("id_siswa='$id'");
+        $this->db->group_by("id_siswa");
+        return $this->db->get();
+    }
 }
 ?>

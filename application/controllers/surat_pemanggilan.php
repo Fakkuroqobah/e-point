@@ -7,9 +7,6 @@ class Surat_pemanggilan extends CI_Controller{
         parent::__construct();
         $this->load->database();
         $this->load->model('m_point_pelanggaran');
-        if($this->session->userdata('status')!='login'){
-            redirect('login/index');
-        }
         
     }
 

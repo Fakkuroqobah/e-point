@@ -42,7 +42,7 @@ class Api extends CI_Controller{
 
     public function riwayat_pelanggaran() {
         $id = $this->input->get('id');
-        $data = $data['pelanggaran_siswa']=$this->m_point_pelanggaran->select('pelanggaran_siswa,pelanggaran','*',"pelanggaran_siswa.id_pelanggaran=pelanggaran.id_pelanggaran and pelanggaran_siswa.id_siswa='$id'",'pelanggaran_siswa.id_pelanggaran_siswa','desc')->result();
+        $data = $data['pelanggaran_siswa']=$this->m_point_pelanggaran->select('pelanggaran_siswa,pelanggaran,siswa','*',"pelanggaran_siswa.id_pelanggaran=pelanggaran.id_pelanggaran and pelanggaran_siswa.id_siswa='$id' and siswa.id_siswa = '$id'",'pelanggaran_siswa.id_pelanggaran_siswa','desc')->result();
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
@@ -135,7 +135,7 @@ class Api extends CI_Controller{
 
     public function riwayat_pemanggilan() {
         $id = $this->input->get('id');
-        $this->db->select("surat_pemanggilan.*,ortu.nama_ortu,siswa.nama_siswa,guru.nama_guru");
+        $this->db->select("surat_pemanggilan.*,ortu.nama_ortu,siswa.nama_siswa,siswa.kelas,guru.nama_guru");
         $this->db->from("surat_pemanggilan");
         $this->db->where("siswa.id_siswa='$id'");
         $this->db->JOIN("ortu","surat_pemanggilan.id_ortu=ortu.id_ortu");

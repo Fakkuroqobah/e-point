@@ -8,13 +8,13 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="<?php echo base_url(); ?>laporan/cari_kelas" method="post">
+                            <form action="<?php echo base_url(); ?>laporan_guru/cari_kelas" method="post">
                                 <div class="form-group">
                                     <label for="kelas" class="form-label">Nama Kelas:</label>
                                     <select class="selectpicker form-control" name="kelas" required>
                                         <option>-- pilih kelas --</option>
                                         <?php foreach ($kelas as $k) { ?>
-                                            <option value="<?php echo $k->id_kelas; ?>"><?php echo $k->nama_kelas; ?></option>
+                                            <option value="<?php echo $k; ?>"><?php echo $k; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -91,7 +91,7 @@
                                                 <td><?php echo $no; ?></td>
                                                 <td><?php echo $k->nama_siswa; ?></td>
                                                 <td><?php echo $k->no_induk; ?></td>
-                                                <td><?php echo $k->nama_kelas; ?></td>
+                                                <td><?php echo $k->kelas; ?></td>
                                                 <td><?php echo $jumlah_point; ?></td>
                                                 <td>
                                                     <?php

@@ -42,7 +42,7 @@
                                 <p>
                                     <?php
                                     foreach ($siswa as $s) {
-                                        $id_kelas = $s->id_kelas;
+                                        
                                     ?>
                                         <?php
                                         foreach ($ketentuan as $kp) {
@@ -55,7 +55,7 @@
                                         ?>
                                         Nama Siswa : <?php echo $s->nama_siswa; ?><br>
                                         No Induk Siswa : <?php echo $s->no_induk; ?><br>
-                                        Kelas Siswa : <?php echo $s->nama_kelas; ?><br>
+                                        Kelas Siswa : <?php echo $s->kelas; ?><br>
                                         Total Point Pelanggaran : <?php echo $s->jumlah_point; ?><br>
                                         Keputusan Pelanggaran : <?php echo $ketentuana ?? '-'; ?>
                                     <?php } ?>

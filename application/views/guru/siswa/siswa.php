@@ -14,7 +14,7 @@
                                     <select class="selectpicker form-control" name="kelas" required>
                                         <option>-- pilih kelas --</option>
                                         <?php foreach ($kelas as $k) { ?>
-                                            <option value="<?php echo $k->id_kelas; ?>"><?php echo $k->nama_kelas; ?></option>
+                                            <option value="<?php echo $k; ?>"><?php echo $k; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -75,6 +75,8 @@
                                             <th>No Induk</th>
                                             <th>Kelas</th>
                                             <th>Jenis Kelamin</th>
+                                            <th>Nama Ortu</th>
+                                            <th>No Hp Ortu</th>
                                             <th>Tanggal Input</th>
                                             <th>Opsi</th>
                                         </tr>
@@ -88,8 +90,10 @@
                                                 <td><?php echo $no; ?></td>
                                                 <td><?php echo $k->nama_siswa; ?></td>
                                                 <td><?php echo $k->no_induk; ?></td>
-                                                <td><?php echo $k->nama_kelas; ?></td>
+                                                <td><?php echo $k->kelas; ?></td>
                                                 <td><?php echo $k->jenis_kelamin; ?></td>
+                                                <td><?php echo $k->nama_ortu; ?></td>
+                                                <td><?php echo $k->no_hp; ?></td>
                                                 <td><?php echo date('d F Y', strtotime($k->tanggal_input)); ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url(); ?>siswa/hapus/<?php echo $k->id_siswa; ?>" class="btn btn-xs btn-danger">hapus</a>
@@ -147,11 +151,38 @@
                         <select class="selectpicker-modal" data-show-subtext="true" data-live-search="true" name="kelas" required>
                             <option>-- pilih kelas --</option>
                             <?php foreach ($kelas as $k) { ?>
-                                <option data-subtext="<?php echo $k->nama_kelas; ?>" value="<?php echo $k->id_kelas; ?>"><?php echo $k->nama_kelas; ?></option>
+                                <option data-subtext="<?php echo $k; ?>" value="<?php echo $k; ?>"><?php echo $k; ?></option>
                             <?php } ?>
                         </select>
                     </div>
-
+                    <hr>
+                    <div class="form-group">
+                        <label for="email">Nama Ortu :</label>
+                        <input type="text" class="form-control" id="" name="nama_ortu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Jenis Kelamin:</label>
+                        <select name="jenis_kelamin_ortu" id="" class="form-control" required>
+                            <option  value="Laki-laki">LAKI - LAKI</option>
+                            <option  value="Perempuan">PEREMPUAN</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">No Telepon :</label>
+                        <input type="number" class="form-control" id="" name="no_ortu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Alamat :</label>
+                        <input type="text" class="form-control" id="" name="alamat_ortu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Username :</label>
+                        <input type="text" class="form-control" id="" name="username_ortu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Password :</label>
+                        <input type="text" class="form-control" id="" name="password_ortu" required>
+                    </div>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -183,11 +214,11 @@
                             <option>-- pilih kelas --</option>
                             <?php
                             foreach ($kelas as $k) {
-                                $where = "id_kelas='$k->id_kelas'";
-                                $data = $this->m_point_pelanggaran->select('siswa', '*', $where, 'id_kelas', 'desc')->num_rows();
+                                $where = "kelas='$k'";
+                                $data = $this->m_point_pelanggaran->select('siswa', '*', $where, 'kelas', 'desc')->num_rows();
 
                             ?>
-                                <option value="<?php echo $k->id_kelas; ?>"><?php echo $k->nama_kelas; ?> ( <?php echo $data; ?> )</option>
+                                <option value="<?php echo $k; ?>"><?php echo $k; ?> ( <?php echo $data; ?> )</option>
                             <?php } ?>
                         </select>
                     </div>
@@ -245,9 +276,38 @@
                         <select class="form-control" name="kelas" id="kelas" required>
                             <option>-- pilih kelas --</option>
                             <?php foreach ($kelas as $k) { ?>
-                                <option value="<?php echo $k->id_kelas; ?>"><?php echo $k->nama_kelas; ?></option>
+                                <option value="<?php echo $k; ?>"><?php echo $k; ?></option>
                             <?php } ?>
                         </select>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <label for="email">Nama Ortu :</label>
+                        <input type="hidden" class="form-control" id="id_ortu" name="id_ortu" required>
+                        <input type="text" class="form-control" id="nama_ortu" name="nama_ortu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Jenis Kelamin:</label>
+                        <select name="jenis_kelamin_ortu" id="jenis_kelamin_ortu" class="form-control" required>
+                            <option  value="Laki-laki">LAKI - LAKI</option>
+                            <option  value="Perempuan">PEREMPUAN</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">No Telepon :</label>
+                        <input type="number" class="form-control" id="no_ortu" name="no_ortu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Alamat :</label>
+                        <input type="text" class="form-control" id="alamat_ortu" name="alamat_ortu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Username :</label>
+                        <input type="text" class="form-control" id="username_ortu" name="username_ortu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Password :</label>
+                        <input type="text" class="form-control" id="password_ortu" name="password_ortu" required>
                     </div>
                 </div>
                 <!-- Modal footer -->
@@ -265,7 +325,7 @@
     // load data for edit
     $(document).ready(function() {
         $('.view_detail').click(function() {
-            var id = $(this).attr('relid'); //get the attribute value
+            var id = $(this).attr('relid');
             $.ajax({
                 url: "<?php echo base_url(); ?>siswa/get_data_siswa_edit",
                 data: {
@@ -276,11 +336,19 @@
                 success: function(response) {
                     $.each(response, function(i, item) {
                         $('#id_siswa').val(response[i].id_siswa);
-                        $('#nama').val(response[i].nama_siswa); //hold the response in id and show on popup
+                        $('#nama').val(response[i].nama_siswa);
                         $('#nis').val(response[i].no_induk);
                         $('#alamat').val(response[i].alamat);
-                        $('#kelas').val(response[i].id_kelas);
+                        $('#kelas').val(response[i].kelas);
                         $('#jenis_kelamin').val(response[i].jenis_kelamin);
+
+                        $('#nama_ortu').val(response[i].nama_ortu);
+                        $('#jenis_kelamin_ortu').val(response[i].jk_ortu);
+                        $('#no_ortu').val(response[i].no_hp);
+                        $('#alamat_ortu').val(response[i].alamat_ortu);
+                        $('#username_ortu').val(response[i].username_ortu);
+                        $('#password_ortu').val(response[i].password_ortu);
+
                         $('#modal_edit').modal('show');
                     });
                 }

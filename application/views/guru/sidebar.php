@@ -31,11 +31,6 @@
                             </a>
                         </li>
                         <li class="submenu-item">
-                            <a href="<?php echo base_url();?>kelas/index" class='submenu-link d-flex'>
-                                <i class="me-3 bi bi-backpack" aria-hidden="true"></i><span>Kelas</span>
-                            </a>
-                        </li>
-                        <li class="submenu-item">
                             <a href="<?php echo base_url();?>jenis_Pelanggaran/index" class='submenu-link d-flex'>
                                 <i class="me-3 bi bi-exclamation-circle" aria-hidden="true"></i><span>Jenis Pelanggaran</span>
                             </a>

@@ -40,7 +40,7 @@
                                 <p>
                                     <?php
                                     foreach ($siswa as $s) {
-                                        $id_kelas = $s->id_kelas;
+                                        $kelas = $s->kelas;
                                     ?>
                                         Nama Siswa : <?php echo $s->nama_siswa; ?><br>
                                         No Induk Siswa : <?php echo $s->no_induk; ?><br>
@@ -70,7 +70,7 @@
 
         function load_data(query) {
             $.ajax({
-                url: "<?php echo base_url(); ?>pelanggaran_siswa_guru/cari_pelanggaran/<?php echo $this->uri->segment('3'); ?>/<?php echo $id_kelas; ?>",
+                url: "<?php echo base_url(); ?>pelanggaran_siswa_guru/cari_pelanggaran/<?php echo $this->uri->segment('3'); ?>/<?php echo $kelas; ?>",
                 method: "POST",
                 data: {
                     query: query

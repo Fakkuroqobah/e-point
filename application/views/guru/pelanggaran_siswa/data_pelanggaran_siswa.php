@@ -22,7 +22,7 @@
                                     <select class="selectpicker form-control" name="kelas" required>
                                         <option>-- pilih kelas --</option>
                                         <?php foreach ($kelas as $k) { ?>
-                                            <option value="<?php echo $k->id_kelas; ?>"><?php echo $k->nama_kelas; ?></option>
+                                            <option value="<?php echo $k; ?>"><?php echo $k; ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -97,7 +97,7 @@
                                                 <td><?php echo $no; ?></td>
                                                 <td><?php echo $k->nama_siswa; ?></td>
                                                 <td><?php echo $k->no_induk; ?></td>
-                                                <td><?php echo $k->nama_kelas; ?></td>
+                                                <td><?php echo $k->kelas; ?></td>
                                                 <td><?php echo $jumlah_point; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url(); ?>pelanggaran_siswa_guru/hasil_input/<?php echo $k->id_siswa; ?>" class="btn btn-xs btn-primary">lihat</a>

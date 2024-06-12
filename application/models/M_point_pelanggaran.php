@@ -30,8 +30,24 @@ class M_point_pelanggaran extends CI_Model{
         return $this->db->get();
     }
 
+    public function selectJoinSiswa($table,$select,$where,$order,$by){
+        $this->db->select($select);
+        $this->db->join("ortu","ortu.id_siswa=siswa.id_siswa",'left');
+        $this->db->from($table);
+        if($where==null){
+        }elseif($where!=null){
+            $this->db->where($where);
+        }
+        if($order==null and $by==null){
+        }elseif($order!=null and $by!=null){
+            $this->db->order_by($order,$by);
+        }
+        return $this->db->get();
+    }
+
     public function select_siswa($table,$select,$where,$order,$by){
         $this->db->select($select);
+        $this->db->join("ortu","ortu.id_siswa=siswa.id_siswa",'left');
         $this->db->from($table);
         if($where==null){
         }elseif($where!=null){
@@ -110,9 +126,8 @@ class M_point_pelanggaran extends CI_Model{
         $this->db->from("siswa");
         $this->db->like('siswa.nama_siswa', $query);
         $this->db->or_like('siswa.no_induk', $query);
-        $this->db->or_like('kelas.nama_kelas', $query);
-        $this->db->JOIN("kelas","siswa.id_kelas=kelas.id_kelas","left");
-        $this->db->order_by('siswa.id_kelas', 'DESC');
+        $this->db->or_like('siswa.kelas', $query);
+        $this->db->order_by('siswa.kelas', 'DESC');
         return $this->db->get();
         }
     
@@ -135,32 +150,26 @@ class M_point_pelanggaran extends CI_Model{
     }
 
     function join_siswa_pelanggaran(){
-        $this->db->select("siswa.nama_siswa,kelas.nama_kelas,siswa.no_induk,siswa.id_siswa,sum(pelanggaran_siswa.point) as jumlah_point");
+        $this->db->select("siswa.nama_siswa,siswa.kelas,siswa.no_induk,siswa.id_siswa,sum(pelanggaran_siswa.point) as jumlah_point");
         $this->db->from("pelanggaran_siswa");
         $this->db->join('siswa','pelanggaran_siswa.id_siswa=siswa.id_siswa','right');
-        $this->db->join('kelas','kelas.id_kelas=siswa.id_kelas','left');
-        // $this->db->where("kelas.id_wali_kelas=guru.id_guru and kelas.id_kelas=siswa.id_kelas");
-        // $this->db->order_by('siswa.id_kelas','asc');
         $this->db->group_by('siswa.id_siswa','asc');
         return $this->db->get();
     }
 
     function join_siswa_pelanggaran_custom($id){
-        $this->db->select("siswa.nama_siswa,kelas.id_kelas,kelas.nama_kelas,siswa.no_induk,siswa.id_siswa,sum(pelanggaran_siswa.point) as jumlah_point");
+        $this->db->select("siswa.nama_siswa,siswa.kelas,siswa.no_induk,siswa.id_siswa,sum(pelanggaran_siswa.point) as jumlah_point");
         $this->db->from("pelanggaran_siswa");
         $this->db->join('siswa','pelanggaran_siswa.id_siswa=siswa.id_siswa','right');
-        $this->db->join('kelas','kelas.id_kelas=siswa.id_kelas','left');
         $this->db->where("siswa.id_siswa='$id'");
-        // $this->db->order_by('siswa.id_kelas','asc');
         $this->db->group_by('siswa.id_siswa','asc');
         return $this->db->get();
     }
 
     function join_siswa_pelanggaran_tertinggi($limit){
-        $this->db->select("siswa.nama_siswa,siswa.no_induk,kelas.nama_kelas,siswa.id_siswa,sum(pelanggaran_siswa.point) as jumlah_point");
+        $this->db->select("siswa.nama_siswa,siswa.no_induk,siswa.kelas,siswa.id_siswa,sum(pelanggaran_siswa.point) as jumlah_point");
         $this->db->from("pelanggaran_siswa");
         $this->db->join('siswa','pelanggaran_siswa.id_siswa=siswa.id_siswa','right');
-        $this->db->join('kelas','kelas.id_kelas=siswa.id_kelas','left');
         $this->db->order_by('jumlah_point','desc');
         $this->db->group_by('siswa.id_siswa','asc');
         $this->db->limit($limit);
@@ -168,32 +177,27 @@ class M_point_pelanggaran extends CI_Model{
     }
 
     function join_siswa_pelanggaran_kelas($kelas){
-        $this->db->select("siswa.nama_siswa,siswa.no_induk,kelas.nama_kelas,siswa.id_siswa,sum(pelanggaran_siswa.point) as jumlah_point");
+        $this->db->select("siswa.nama_siswa,siswa.no_induk,siswa.kelas,siswa.id_siswa,sum(pelanggaran_siswa.point) as jumlah_point");
         $this->db->from("pelanggaran_siswa");
         $this->db->join('siswa','pelanggaran_siswa.id_siswa=siswa.id_siswa','right');
-        $this->db->join('kelas','kelas.id_kelas=siswa.id_kelas','left');
-        $this->db->where("siswa.id_kelas='$kelas'");
-        // $this->db->where("kelas.id_wali_kelas=guru.id_guru and kelas.id_kelas=siswa.id_kelas and siswa.id_kelas='$kelas'");
-        $this->db->order_by('siswa.id_kelas','asc');
+        $this->db->where("siswa.kelas='$kelas'");
         $this->db->group_by('siswa.id_siswa','asc');
         return $this->db->get();
     }
 
     function join_ortu($id_siswa){
-        $this->db->select("siswa.*,kelas.*,ortu.id_ortu,ortu.nama_ortu");
+        $this->db->select("siswa.*,siswa.*,ortu.id_ortu,ortu.nama_ortu");
         $this->db->from("siswa");
-        $this->db->JOIN("kelas","siswa.id_kelas=kelas.id_kelas","left");
         $this->db->JOIN("ortu","siswa.id_siswa=ortu.id_siswa","left");
         $this->db->where("siswa.id_siswa='$id_siswa'");
         return $this->db->get();
     }
 
     function surat($id_surat = null){
-        $this->db->select("surat_pemanggilan.*,ortu.nama_ortu,siswa.nama_siswa,kelas.nama_kelas,guru.nama_guru");
+        $this->db->select("surat_pemanggilan.*,ortu.nama_ortu,siswa.nama_siswa,siswa.kelas,guru.nama_guru");
         $this->db->from("surat_pemanggilan");
         $this->db->JOIN("ortu","surat_pemanggilan.id_ortu=ortu.id_ortu");
         $this->db->JOIN("siswa","ortu.id_siswa=siswa.id_siswa");
-        $this->db->JOIN("kelas","siswa.id_kelas=kelas.id_kelas");
         $this->db->JOIN("guru","surat_pemanggilan.id_guru=guru.id_guru");
         if(!is_null($id_surat)) {
             $this->db->where("surat_pemanggilan.id_surat='$id_surat'");
@@ -201,12 +205,11 @@ class M_point_pelanggaran extends CI_Model{
         return $this->db->get();
     }
 
-    function jumlah_point_kelas($id_kelas) {
+    function jumlah_point_kelas($kelas) {
         $this->db->select("*, SUM(point) AS jumlah_point");
         $this->db->from("siswa");
         $this->db->JOIN("pelanggaran_siswa","siswa.id_siswa=pelanggaran_siswa.id_siswa", "LEFT");
-        $this->db->JOIN("kelas","siswa.id_kelas=kelas.id_kelas");
-        $this->db->where("siswa.id_kelas='$id_kelas'");
+        $this->db->where("siswa.kelas='$kelas'");
         $this->db->group_by("siswa.id_siswa");
         return $this->db->get();
     }

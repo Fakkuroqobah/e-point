@@ -9,7 +9,6 @@ class Laporan_guru extends CI_Controller{
         parent::__construct();
         $this->load->database();
         $this->load->model('m_point_pelanggaran');
-        // $this->load->library('excel');
         if($this->session->userdata('status')!='login'){
             redirect('login/index');
         }
@@ -18,7 +17,6 @@ class Laporan_guru extends CI_Controller{
 
     public function index(){
         $data['judul_halaman']='Laporan';
-        // $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','desc')->result();
         $data['ketentuan'] = [
             [
                 'id_ketentuan_point' => 1,
@@ -67,7 +65,6 @@ class Laporan_guru extends CI_Controller{
 
     public function siswa(){
         $data['judul_halaman']='Laporan';
-        // $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','desc')->result();
         $data['ketentuan'] = [
             [
                 'id_ketentuan_point' => 1,
@@ -106,7 +103,8 @@ class Laporan_guru extends CI_Controller{
                 'point_pelanggaran_tinggi' => 500,
             ],
         ];
-        $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
+
+        $data['kelas']=list_kelas();
         $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_tertinggi('10')->result();
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
@@ -118,7 +116,6 @@ class Laporan_guru extends CI_Controller{
 
     public function cari_kelas(){
         $kelas=$this->input->post('kelas');
-        // $data['ketentuan']=$this->m_point_pelanggaran->select('ketentuan_point','*','','id_ketentuan_point','desc')->result();
         $data['ketentuan'] = [
             [
                 'id_ketentuan_point' => 1,
@@ -157,13 +154,9 @@ class Laporan_guru extends CI_Controller{
                 'point_pelanggaran_tinggi' => 500,
             ],
         ];
-        $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
+        $data['kelas']=list_kelas();
         $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_kelas($kelas)->result();
-        $data_kelas=$this->m_point_pelanggaran->select('kelas','*',"id_kelas='$kelas'",'id_kelas','asc')->result();
-        foreach($data_kelas as $dk){
-            $data['nama_kelas']=$dk->nama_kelas;
-        }
-        $data['id_kelas']=$kelas;
+
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
         
@@ -178,14 +171,14 @@ class Laporan_guru extends CI_Controller{
         $tanggal=array();
         $jumlah=array();
         if($pelanggaran=='semua'){
-            $where="kelas.id_kelas=pelanggaran_siswa.id_kelas and siswa.id_siswa=pelanggaran_siswa.id_siswa and pelanggaran_siswa.id_pelanggaran=pelanggaran.id_pelanggaran and date(pelanggaran_siswa.tanggal_pelanggaran) between '$tanggal_awal' and '$tanggal_akhir'";
-            $data['pelanggaran_detail']=$this->m_point_pelanggaran->select('pelanggaran_siswa,siswa,kelas,pelanggaran','*',$where,'pelanggaran_siswa.id_pelanggaran_siswa','desc')->result();
+            $where="siswa.id_siswa=pelanggaran_siswa.id_siswa and pelanggaran_siswa.id_pelanggaran=pelanggaran.id_pelanggaran and date(pelanggaran_siswa.tanggal_pelanggaran) between '$tanggal_awal' and '$tanggal_akhir'";
+            $data['pelanggaran_detail']=$this->m_point_pelanggaran->select('pelanggaran_siswa,siswa,pelanggaran','*',$where,'pelanggaran_siswa.id_pelanggaran_siswa','desc')->result();
              
             $data['nama_pelanggaran']="semua jenis pelanggaran";
         }else{
             
-            $where="pelanggaran_siswa.id_pelanggaran='$pelanggaran' and kelas.id_kelas=pelanggaran_siswa.id_kelas and siswa.id_siswa=pelanggaran_siswa.id_siswa and pelanggaran_siswa.id_pelanggaran=pelanggaran.id_pelanggaran and date(pelanggaran_siswa.tanggal_pelanggaran) between '$tanggal_awal' and '$tanggal_akhir'";
-            $data['pelanggaran_detail']=$this->m_point_pelanggaran->select('pelanggaran_siswa,siswa,kelas,pelanggaran','*',$where,'pelanggaran_siswa.id_pelanggaran_siswa','desc')->result();
+            $where="pelanggaran_siswa.id_pelanggaran='$pelanggaran' and siswa.id_siswa=pelanggaran_siswa.id_siswa and pelanggaran_siswa.id_pelanggaran=pelanggaran.id_pelanggaran and date(pelanggaran_siswa.tanggal_pelanggaran) between '$tanggal_awal' and '$tanggal_akhir'";
+            $data['pelanggaran_detail']=$this->m_point_pelanggaran->select('pelanggaran_siswa,siswa,pelanggaran','*',$where,'pelanggaran_siswa.id_pelanggaran_siswa','desc')->result();
                 
             $where_pelanggaran="id_pelanggaran='$pelanggaran'";
             $dp=$this->m_point_pelanggaran->select('pelanggaran','*',$where_pelanggaran,'id_pelanggaran','desc')->result();

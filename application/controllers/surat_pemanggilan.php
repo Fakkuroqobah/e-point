@@ -45,8 +45,8 @@ class Surat_pemanggilan extends CI_Controller{
                 <tr>
                 <td>'.$row->nama_siswa.'</td>
                 <td>'.$row->no_induk.'</td>
-                <td>'.$row->nama_kelas.'</td>
-                <td><a href="'.base_url().'surat_pemanggilan/input_pemanggilan/'.$row->id_siswa.'/'.$row->id_kelas.'" class="btn btn-danger btn-sm">proses</a></td>
+                <td>'.$row->kelas.'</td>
+                <td><a href="'.base_url().'surat_pemanggilan/input_pemanggilan/'.$row->id_siswa.'/'.$row->kelas.'" class="btn btn-danger btn-sm">proses</a></td>
                 </tr>
                 ';
             }

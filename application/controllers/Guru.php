@@ -39,7 +39,7 @@ class Guru extends CI_Controller{
             'mata_pelajaran'=>$mata_pelajaran,
             'username'=>$username,
             'password'=>$password,
-            'status_akun'=>'tidak aktif',
+            'status_akun'=>'aktif',
         );
         $this->m_point_pelanggaran->insert('guru',$nilai);
         $this->session->set_userdata('pesan','t');

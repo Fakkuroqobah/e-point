@@ -29,7 +29,7 @@
                                             <tr>
                                                 <td><?php echo $no; ?></td>
                                                 <td><?php echo date('d F Y H:m', strtotime($a->tanggal_pelanggaran)); ?></td>
-                                                <td><?php echo $a->nama_guru; ?> berhasil menambahkan pelanggaran <?php echo $a->nama_pelanggaran; ?> dengan point <?php echo $a->point; ?> kepada siswa bernama <a href="<?php echo base_url(); ?>pelanggaran_siswa_guru/hasil_input/<?php echo $a->id_siswa; ?>"><?php echo $a->nama_siswa; ?></a> kelas <?php echo $a->nama_kelas; ?></td>
+                                                <td><?php echo $a->nama_guru; ?> berhasil menambahkan pelanggaran <?php echo $a->nama_pelanggaran; ?> dengan point <?php echo $a->point; ?> kepada siswa bernama <a href="<?php echo base_url(); ?>pelanggaran_siswa_guru/hasil_input/<?php echo $a->id_siswa; ?>"><?php echo $a->nama_siswa; ?></a> kelas <?php echo $a->kelas; ?></td>
                                             </tr>
                                         <?php $no++;
                                         } ?>

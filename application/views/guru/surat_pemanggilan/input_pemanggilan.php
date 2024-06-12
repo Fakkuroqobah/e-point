@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="kelas" class="mb-2">Kelas</label>
-                                    <input type="text" class="form-control" value="<?php echo $siswa->nama_kelas ?>" name="kelas" id="kelas" readonly>
+                                    <input type="text" class="form-control" value="<?php echo $siswa->kelas ?>" name="kelas" id="kelas" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama_ortu" class="mb-2">Nama Orang Tua Siswa</label>

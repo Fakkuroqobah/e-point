@@ -71,7 +71,7 @@
                                                     <td><?php echo $no; ?></td>
                                                     <td><?php echo $s->no_surat; ?></td>
                                                     <td><?php echo $s->nama_siswa; ?></td>
-                                                    <td><?php echo $s->nama_kelas; ?></td>
+                                                    <td><?php echo $s->kelas; ?></td>
                                                     <td><?php echo $s->nama_guru; ?></td>
                                                     <td><?php echo date('d-m-Y', strtotime($s->tanggal_pemanggilan)) . ' ' . date('H:i', strtotime($s->jam_pemanggilan)) ?></td>
                                                     <td><?php echo date('d-m-Y', strtotime($s->tanggal_surat)) ?></td>

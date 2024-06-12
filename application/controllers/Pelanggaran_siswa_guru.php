@@ -9,7 +9,6 @@ class Pelanggaran_siswa_guru extends CI_Controller{
         parent::__construct();
         $this->load->database();
         $this->load->model('m_point_pelanggaran');
-        // $this->load->library('excel');
         if($this->session->userdata('status')!='login'){
             redirect('login/index');
         }
@@ -51,8 +50,8 @@ class Pelanggaran_siswa_guru extends CI_Controller{
             <tr>
             <td>'.$row->nama_siswa.'</td>
             <td>'.$row->no_induk.'</td>
-            <td>'.$row->nama_kelas.'</td>
-            <td><a href="'.base_url().'pelanggaran_siswa_guru/input_pelanggaran/'.$row->id_siswa.'/'.$row->id_kelas.'" class="btn btn-danger btn-sm">proses</a></td>
+            <td>'.$row->kelas.'</td>
+            <td><a href="'.base_url().'pelanggaran_siswa_guru/input_pelanggaran/'.$row->id_siswa.'/'.$row->kelas.'" class="btn btn-danger btn-sm">proses</a></td>
             </tr>
             ';
         }
@@ -70,7 +69,7 @@ class Pelanggaran_siswa_guru extends CI_Controller{
     public function input_pelanggaran(){
         $data['judul_halaman']='Pelanggaran Siswa';
         $id_siswa=$this->uri->segment('3');
-        $data['siswa']=$this->m_point_pelanggaran->select('siswa,kelas','*',"siswa.id_kelas=kelas.id_kelas and siswa.id_siswa='$id_siswa'",'siswa.id_siswa','asc')->result();
+        $data['siswa']=$this->m_point_pelanggaran->select('siswa','*',"siswa.id_siswa='$id_siswa'",'siswa.id_siswa','asc')->result();
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
         
@@ -82,7 +81,7 @@ class Pelanggaran_siswa_guru extends CI_Controller{
         $output = '';
         $query = '';
         $id_siswa=$this->uri->segment('3');
-        $id_kelas=$this->uri->segment('4');
+        $kelas=$this->uri->segment('4');
         if($this->input->post('query'))
         {
         $query = $this->input->post('query');
@@ -107,7 +106,7 @@ class Pelanggaran_siswa_guru extends CI_Controller{
             <td>'.$row->nama_pelanggaran.'</td>
             <td>'.$row->nama_jenis_pelanggaran.'</td>
             <td>'.$row->point_pelanggaran.'</td>
-            <td><a href="'.base_url().'pelanggaran_siswa_guru/input_pelanggaran_siswa/'.$id_siswa.'/'.$row->id_pelanggaran.'/'.$id_kelas.'/'.$row->point_pelanggaran.'" class="btn btn-danger btn-sm">proses</a></td>
+            <td><a href="'.base_url().'pelanggaran_siswa_guru/input_pelanggaran_siswa/'.$id_siswa.'/'.$row->id_pelanggaran.'/'.$kelas.'/'.$row->point_pelanggaran.'" class="btn btn-danger btn-sm">proses</a></td>
             </tr>
             ';
         }
@@ -125,13 +124,11 @@ class Pelanggaran_siswa_guru extends CI_Controller{
     public function input_pelanggaran_siswa(){
         $id_siswa=$this->uri->segment('3');
         $id_pelanggaran_siswa=$this->uri->segment('4');
-        $id_kelas=$this->uri->segment('5');
         $point=$this->uri->segment('6');
         $nilai=array(
             'id_pelanggaran_siswa'=>'',  
             'id_pelanggaran'=>$id_pelanggaran_siswa,  
             'id_siswa'=>$id_siswa,
-            'id_kelas'=>$id_kelas,
             'id_pelapor'=>$this->session->userdata('id_akun'),
             'tanggal_pelanggaran'=>date('Y-m-d H:i:s'),
             'point'=>$point,
@@ -154,7 +151,6 @@ class Pelanggaran_siswa_guru extends CI_Controller{
         $id_siswa=$this->uri->segment('3');
         $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_custom($id_siswa)->result();
         $data['pelanggaran_siswa']=$this->m_point_pelanggaran->select('pelanggaran_siswa,pelanggaran','*',"pelanggaran_siswa.id_pelanggaran=pelanggaran.id_pelanggaran and pelanggaran_siswa.id_siswa='$id_siswa'",'pelanggaran_siswa.id_pelanggaran_siswa','desc')->result();
-        // $data['ketentuan_point']=$this->m_point_pelanggaran->select('ketentuan_point','*',"",'id_ketentuan_point','desc')->result();
         $data['ketentuan'] = [
             [
                 'id_ketentuan_point' => 1,
@@ -213,13 +209,9 @@ class Pelanggaran_siswa_guru extends CI_Controller{
 
     public function data_siswa(){
         $data['judul_halaman']='Siswa';
-        $data_kelas=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','desc')->result();
-        foreach($data_kelas as $dk){
-            $id_kelas=$dk->id_kelas;
-            $data['nama_kelas']=$dk->nama_kelas;
-        }
-        $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_kelas($id_kelas)->result();
-        $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
+        $kelas=$this->input->post('kelas');
+        $data['kelas']=list_kelas();
+        $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_kelas($kelas)->result();
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
         
@@ -229,13 +221,8 @@ class Pelanggaran_siswa_guru extends CI_Controller{
 
     public function cari_kelas(){
         $kelas=$this->input->post('kelas');
-        $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
+        $data['kelas']=list_kelas();
         $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_kelas($kelas)->result();
-        $data_kelas=$this->m_point_pelanggaran->select('kelas','*',"id_kelas='$kelas'",'id_kelas','asc')->result();
-        foreach($data_kelas as $dk){
-            $data['nama_kelas']=$dk->nama_kelas;
-        }
-        $data['id_kelas']=$kelas;
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
         

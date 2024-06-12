@@ -135,12 +135,11 @@ class Api extends CI_Controller{
 
     public function riwayat_pemanggilan() {
         $id = $this->input->get('id');
-        $this->db->select("surat_pemanggilan.*,ortu.nama_ortu,siswa.nama_siswa,kelas.nama_kelas,guru.nama_guru");
+        $this->db->select("surat_pemanggilan.*,ortu.nama_ortu,siswa.nama_siswa,guru.nama_guru");
         $this->db->from("surat_pemanggilan");
         $this->db->where("siswa.id_siswa='$id'");
         $this->db->JOIN("ortu","surat_pemanggilan.id_ortu=ortu.id_ortu");
         $this->db->JOIN("siswa","ortu.id_siswa=siswa.id_siswa");
-        $this->db->JOIN("kelas","siswa.id_kelas=kelas.id_kelas");
         $this->db->JOIN("guru","surat_pemanggilan.id_guru=guru.id_guru");
         $data = $this->db->get()->result();
 

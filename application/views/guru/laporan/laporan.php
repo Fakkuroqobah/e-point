@@ -63,7 +63,7 @@
                                                 <td><?php echo $no; ?></td>
                                                 <td><?php echo $k->nama_siswa; ?></td>
                                                 <td><?php echo $k->no_induk; ?></td>
-                                                <td><?php echo $k->nama_kelas; ?></td>
+                                                <td><?php echo $k->kelas; ?></td>
                                                 <td><?php echo $jumlah_point; ?></td>
                                                 <td>
                                                     <a href="<?php echo base_url(); ?>pelanggaran_siswa_guru/hasil_input/<?php echo $k->id_siswa; ?>" class="btn btn-xs btn-primary">lihat</a>

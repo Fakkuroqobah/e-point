@@ -18,13 +18,8 @@ class Siswa extends CI_Controller{
 
     public function index(){
         $data['judul_halaman']='Siswa';
-        $data_kelas=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','desc')->result();
-        foreach($data_kelas as $dk){
-            $id_kelas=$dk->id_kelas;
-            $data['nama_kelas']=$dk->nama_kelas;
-        }
-        $data['siswa']=$this->m_point_pelanggaran->select('kelas,siswa','*',"kelas.id_kelas=siswa.id_kelas and siswa.id_kelas='$id_kelas'",'siswa.id_kelas','asc')->result();
-        $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
+        $data['kelas']=list_kelas();
+        $data['siswa']=$this->m_point_pelanggaran->selectJoinSiswa('siswa','siswa.*,ortu.nama_ortu,ortu.no_hp',"",'','asc')->result();
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
         
@@ -34,13 +29,8 @@ class Siswa extends CI_Controller{
 
     public function cari_kelas(){
         $kelas=$this->input->post('kelas');
-        $data['kelas']=$this->m_point_pelanggaran->select('kelas','*','','id_kelas','asc')->result();
-        $data['siswa']=$this->m_point_pelanggaran->select('kelas,siswa','*',"kelas.id_kelas=siswa.id_kelas and siswa.id_kelas='$kelas'",'siswa.id_kelas','asc')->result();
-        $data_kelas=$this->m_point_pelanggaran->select('kelas','*',"id_kelas='$kelas'",'id_kelas','asc')->result();
-        foreach($data_kelas as $dk){
-            $data['nama_kelas']=$dk->nama_kelas;
-        }
-        $data['id_kelas']=$kelas;
+        $data['siswa']=$this->m_point_pelanggaran->select('siswa','*',"siswa.kelas='$kelas'",'siswa.kelas','asc')->result();
+        $data['kelas']=list_kelas();
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');
         
@@ -54,6 +44,14 @@ class Siswa extends CI_Controller{
         $alamat=$this->input->post('alamat');
         $jenis_kelamin=$this->input->post('jenis_kelamin');
         $kelas=$this->input->post('kelas');
+        
+        $nama_ortu=$this->input->post('nama_ortu');
+        $jenis_kelamin_ortu=$this->input->post('jenis_kelamin_ortu');
+        $no_ortu=$this->input->post('no_ortu');
+        $alamat_ortu=$this->input->post('alamat_ortu');
+        $username_ortu=$this->input->post('username_ortu');
+        $password_ortu=$this->input->post('password_ortu');
+
         $tanggal_input=date('Y-m-d H:i:s');
         $nilai=array(
             'id_siswa'=>'',
@@ -61,10 +59,26 @@ class Siswa extends CI_Controller{
             'no_induk'=>$nis,
             'alamat'=>$alamat,
             'jenis_kelamin'=>$jenis_kelamin,
-            'id_kelas'=>$kelas,
-            'tanggal_input'=>$tanggal_input
+            'kelas'=>$kelas,
+            'tanggal_input'=>$tanggal_input,
+            'password'=>'password'
         );
         $this->m_point_pelanggaran->insert('siswa',$nilai);
+        
+        $id_siswa = $this->db->query("SELECT * FROM siswa ORDER BY id_siswa DESC LIMIT 1");
+        $id_siswa = $id_siswa->row();
+        
+        $nilai=array(
+            'id_ortu'=>'',
+            'id_siswa'=>$id_siswa->id_siswa,
+            'nama_ortu'=>$nama_ortu,
+            'jenis_kelamin'=>$jenis_kelamin_ortu,
+            'no_hp'=>$no_ortu,
+            'alamat'=>$alamat_ortu,
+            'username'=>$username_ortu,
+            'password'=>$password_ortu,
+        );
+        $this->m_point_pelanggaran->insert('ortu',$nilai);
         $this->session->set_userdata('pesan','t');
         redirect('siswa');
     }
@@ -76,17 +90,36 @@ class Siswa extends CI_Controller{
         $alamat=$this->input->post('alamat');
         $jenis_kelamin=$this->input->post('jenis_kelamin');
         $kelas=$this->input->post('kelas');
+
+        $nama_ortu=$this->input->post('nama_ortu');
+        $jenis_kelamin_ortu=$this->input->post('jenis_kelamin_ortu');
+        $no_ortu=$this->input->post('no_ortu');
+        $alamat_ortu=$this->input->post('alamat_ortu');
+        $username_ortu=$this->input->post('username_ortu');
+        $password_ortu=$this->input->post('password_ortu');
+
         $nilai=array(
             'nama_siswa'=>$nama,
             'no_induk'=>$nis,
             'alamat'=>$alamat,
             'jenis_kelamin'=>$jenis_kelamin,
-            'id_kelas'=>$kelas,
+            'kelas'=>$kelas,
         );
         $where=array(
             'id_siswa'=>$id
         );
         $this->m_point_pelanggaran->update('siswa',$nilai,$where);
+
+        $nilai=array(
+            'nama_ortu'=>$nama_ortu,
+            'jenis_kelamin'=>$jenis_kelamin_ortu,
+            'no_hp'=>$no_ortu,
+            'alamat'=>$alamat_ortu,
+            'username'=>$username_ortu,
+            'password'=>$password_ortu,
+        );
+        $this->m_point_pelanggaran->update('ortu',$nilai,$where);
+
         $this->session->set_userdata('pesan','e');
         redirect('siswa');
     }
@@ -123,23 +156,20 @@ class Siswa extends CI_Controller{
                         'no_induk'=>$no_induk,
                         'alamat'=>$alamat,
                         'jenis_kelamin'=>$jenis_kelamin,
-                        'id_kelas'=>$kelas,
+                        'kelas'=>$kelas,
                         'tanggal_input'=>date('Y-m-d H:i:s'),
+                        'password'=>'password'
 					);
 				}
 			}
             $this->m_point_pelanggaran->insert_siswa_import($data);
             $where_upload=array(
-                'id_kelas'=>$kelas,
+                'kelas'=>$kelas,
             );
-            $kelas=$this->m_point_pelanggaran->select('kelas','*',"id_kelas='$kelas'",'id_kelas','desc')->result();
-            foreach($kelas as $k){
-                $nama_kelas=$k->nama_kelas;
-            }
             $jum_uplod=$this->m_point_pelanggaran->select('siswa','*',$where_upload,'id_siswa','desc')->num_rows();
             $this->session->set_userdata('pesan',"b");
             $this->session->set_userdata('jum_data',"$jum_uplod");
-            $this->session->set_userdata('nama_kelas',"$nama_kelas");
+            $this->session->set_userdata('nama_kelas',"$kelas");
             redirect('siswa/index');
         }
         
@@ -147,7 +177,7 @@ class Siswa extends CI_Controller{
 
     function get_data_siswa_edit(){
         $id_siswa = $this->input->get('id');
-        $get_siswa = $this->m_point_pelanggaran->select_siswa('siswa','*',"id_siswa='$id_siswa'",'id_siswa','desc')->result();
+        $get_siswa = $this->m_point_pelanggaran->select_siswa('siswa','siswa.*,ortu.nama_ortu,ortu.jenis_kelamin as jk_ortu,ortu.no_hp,ortu.alamat as alamat_ortu,ortu.username as username_ortu,ortu.password as password_ortu',"siswa.id_siswa='$id_siswa'",'siswa.id_siswa','desc')->result();
         echo json_encode($get_siswa); 
         
     }

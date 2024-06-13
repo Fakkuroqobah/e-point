@@ -44,7 +44,7 @@
                                     ?>
                                         Nama Siswa : <?php echo $s->nama_siswa; ?><br>
                                         No Induk Siswa : <?php echo $s->no_induk; ?><br>
-                                        Kelas Siswa : <?php echo $s->nama_kelas; ?><br>
+                                        Kelas Siswa : <?php echo $s->kelas; ?><br>
 
                                     <?php } ?>
                                 </p>

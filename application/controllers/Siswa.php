@@ -29,7 +29,7 @@ class Siswa extends CI_Controller{
 
     public function cari_kelas(){
         $kelas=$this->input->post('kelas');
-        $data['siswa']=$this->m_point_pelanggaran->select('siswa','*',"siswa.kelas='$kelas'",'siswa.kelas','asc')->result();
+        $data['siswa']=$this->m_point_pelanggaran->selectJoinSiswa('siswa','siswa.*,ortu.nama_ortu,ortu.no_hp',"siswa.kelas='$kelas'",'siswa.kelas','asc')->result();
         $data['kelas']=list_kelas();
         $this->load->view('guru/header',$data);
         $this->load->view('guru/sidebar');

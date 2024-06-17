@@ -69,6 +69,7 @@ class Api extends CI_Controller{
 
             $data_session = array(
                             'id_akun'=>$id_siswa,
+                            'id_siswa'=>$id_siswa,
                             'nama_akun'=>$nama,
                             'username'=>$user,
                             'password'=>$pass
@@ -99,6 +100,7 @@ class Api extends CI_Controller{
             
             foreach($akun as $a){
                 $id_ortu=$a->id_ortu;
+                $id_siswa=$a->id_siswa;
                 $nama=$a->nama_ortu;
                 $user=$a->username;
                 $pass=$a->password;
@@ -106,6 +108,7 @@ class Api extends CI_Controller{
 
             $data_session = array(
                             'id_akun'=>$id_ortu,
+                            'id_siswa'=>$id_siswa,
                             'nama_akun'=>$nama,
                             'username'=>$user,
                             'password'=>$pass
@@ -147,6 +150,32 @@ class Api extends CI_Controller{
             ->set_content_type('application/json')
             ->set_status_header(200)
             ->set_output(json_encode($data));
+    }
+
+    public function edit_profil() {
+        $id = $this->input->post('id');
+        $password=$this->input->post('password');
+        $tipe=$this->input->post('tipe');
+        $nilai=array(
+            'password'=>$password,
+        );
+
+        if($tipe == "siswa") {
+            $where=array(
+                'id_siswa'=>$id
+            );
+            $this->m_point_pelanggaran->update('siswa',$nilai,$where);
+        }else{
+            $where=array(
+                'id_ortu'=>$id
+            );
+            $this->m_point_pelanggaran->update('ortu',$nilai,$where);
+        }
+        
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output("Berhasil");
     }
 
 }

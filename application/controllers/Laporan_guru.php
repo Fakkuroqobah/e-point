@@ -20,17 +20,45 @@ class Laporan_guru extends CI_Controller{
         $data['ketentuan'] = [
             [
                 'id_ketentuan_point' => 1,
-                'nama_ketentuan' => 'peringatan ke 1 ( oleh wali kelas )',
-                'point_pelanggaran_rendah' => 30,
-                'point_pelanggaran_tinggi' => 30,
-                'konsekuensi' => 'Surat Pemanggilan orang tua 1 + Skorsing 3 hari + Setelah masuk membersihkan lingkungan sekolah selama 2 hari'
+                'nama_ketentuan' => 'Bimbingan Wali Kelas',
+                'konsekuensi' => 'Bimbingan Wali Kelas',
+                'point_pelanggaran_rendah' => 20,
+                'point_pelanggaran_tinggi' => 20,
             ],
             [
                 'id_ketentuan_point' => 2,
-                'nama_ketentuan' => 'peringatan ke 2 ( wali kelas dan K3 )',
+                'nama_ketentuan' => 'Penggilan Orang Tua ke 1, Tanda Tangan Surat Skorsing 1 hari dan Membersihkan Kelas',
+                'konsekuensi' => 'Penggilan Orang Tua ke 1, Tanda Tangan Surat Skorsing 1 hari dan Membersihkan Kelas',
+                'point_pelanggaran_rendah' => 30,
+                'point_pelanggaran_tinggi' => 30,
+            ],
+            [
+                'id_ketentuan_point' => 3,
+                'nama_ketentuan' => 'Penanganan Wali Kelas dan Guru BK diberikan hukuman Membersihkan Kelas',
+                'konsekuensi' => 'Penanganan Wali Kelas dan Guru BK diberikan hukuman Membersihkan Kelas',
+                'point_pelanggaran_rendah' => 40,
+                'point_pelanggaran_tinggi' => 40,
+            ],
+            [
+                'id_ketentuan_point' => 4,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 2, Tanda Tangan Surat Skorsing 3 hari dan Membersihkan Lingkungan Sekolah',
+                'konsekuensi' => 'Panggilan Orang Tua ke 2, Tanda Tangan Surat Skorsing 3 hari dan Membersihkan Lingkungan Sekolah',
                 'point_pelanggaran_rendah' => 50,
                 'point_pelanggaran_tinggi' => 50,
-                'konsekuensi' => 'Surat Pemanggilan orang tua 2 + Skorsing 5 hari + Setelah masuk membersihkan lingkungan sekolah selama 3 hari'
+            ],
+            [
+                'id_ketentuan_point' => 5,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 3 dan Tanda Tangan Surat Skorsing 1 minggu',
+                'konsekuensi' => 'Panggilan Orang Tua ke 3 dan Tanda Tangan Surat Skorsing 1 minggu',
+                'point_pelanggaran_rendah' => 80,
+                'point_pelanggaran_tinggi' => 80,
+            ],
+            [
+                'id_ketentuan_point' => 6,
+                'nama_ketentuan' => 'Dikembalikan ke Orang Tua',
+                'konsekuensi' => 'Dikembalikan ke Orang Tua',
+                'point_pelanggaran_rendah' => 100,
+                'point_pelanggaran_tinggi' => 100,
             ],
         ];
         $data['siswa']=$this->m_point_pelanggaran->join_siswa_pelanggaran_tertinggi('10')->result();
@@ -46,17 +74,45 @@ class Laporan_guru extends CI_Controller{
         $data['ketentuan'] = [
             [
                 'id_ketentuan_point' => 1,
-                'nama_ketentuan' => 'peringatan ke 1 ( oleh wali kelas )',
-                'point_pelanggaran_rendah' => 30,
-                'point_pelanggaran_tinggi' => 30,
-                'konsekuensi' => 'Surat Pemanggilan orang tua 1 + Skorsing 3 hari + Setelah masuk membersihkan lingkungan sekolah selama 2 hari'
+                'nama_ketentuan' => 'Bimbingan Wali Kelas',
+                'konsekuensi' => 'Bimbingan Wali Kelas',
+                'point_pelanggaran_rendah' => 20,
+                'point_pelanggaran_tinggi' => 20,
             ],
             [
                 'id_ketentuan_point' => 2,
-                'nama_ketentuan' => 'peringatan ke 2 ( wali kelas dan K3 )',
+                'nama_ketentuan' => 'Penggilan Orang Tua ke 1, Tanda Tangan Surat Skorsing 1 hari dan Membersihkan Kelas',
+                'konsekuensi' => 'Penggilan Orang Tua ke 1, Tanda Tangan Surat Skorsing 1 hari dan Membersihkan Kelas',
+                'point_pelanggaran_rendah' => 30,
+                'point_pelanggaran_tinggi' => 30,
+            ],
+            [
+                'id_ketentuan_point' => 3,
+                'nama_ketentuan' => 'Penanganan Wali Kelas dan Guru BK diberikan hukuman Membersihkan Kelas',
+                'konsekuensi' => 'Penanganan Wali Kelas dan Guru BK diberikan hukuman Membersihkan Kelas',
+                'point_pelanggaran_rendah' => 40,
+                'point_pelanggaran_tinggi' => 40,
+            ],
+            [
+                'id_ketentuan_point' => 4,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 2, Tanda Tangan Surat Skorsing 3 hari dan Membersihkan Lingkungan Sekolah',
+                'konsekuensi' => 'Panggilan Orang Tua ke 2, Tanda Tangan Surat Skorsing 3 hari dan Membersihkan Lingkungan Sekolah',
                 'point_pelanggaran_rendah' => 50,
                 'point_pelanggaran_tinggi' => 50,
-                'konsekuensi' => 'Surat Pemanggilan orang tua 2 + Skorsing 5 hari + Setelah masuk membersihkan lingkungan sekolah selama 3 hari'
+            ],
+            [
+                'id_ketentuan_point' => 5,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 3 dan Tanda Tangan Surat Skorsing 1 minggu',
+                'konsekuensi' => 'Panggilan Orang Tua ke 3 dan Tanda Tangan Surat Skorsing 1 minggu',
+                'point_pelanggaran_rendah' => 80,
+                'point_pelanggaran_tinggi' => 80,
+            ],
+            [
+                'id_ketentuan_point' => 6,
+                'nama_ketentuan' => 'Dikembalikan ke Orang Tua',
+                'konsekuensi' => 'Dikembalikan ke Orang Tua',
+                'point_pelanggaran_rendah' => 100,
+                'point_pelanggaran_tinggi' => 100,
             ],
         ];
 
@@ -75,17 +131,45 @@ class Laporan_guru extends CI_Controller{
         $data['ketentuan'] = [
             [
                 'id_ketentuan_point' => 1,
-                'nama_ketentuan' => 'peringatan ke 1 ( oleh wali kelas )',
-                'point_pelanggaran_rendah' => 30,
-                'point_pelanggaran_tinggi' => 30,
-                'konsekuensi' => 'Surat Pemanggilan orang tua 1 + Skorsing 3 hari + Setelah masuk membersihkan lingkungan sekolah selama 2 hari'
+                'nama_ketentuan' => 'Bimbingan Wali Kelas',
+                'konsekuensi' => 'Bimbingan Wali Kelas',
+                'point_pelanggaran_rendah' => 20,
+                'point_pelanggaran_tinggi' => 20,
             ],
             [
                 'id_ketentuan_point' => 2,
-                'nama_ketentuan' => 'peringatan ke 2 ( wali kelas dan K3 )',
+                'nama_ketentuan' => 'Penggilan Orang Tua ke 1, Tanda Tangan Surat Skorsing 1 hari dan Membersihkan Kelas',
+                'konsekuensi' => 'Penggilan Orang Tua ke 1, Tanda Tangan Surat Skorsing 1 hari dan Membersihkan Kelas',
+                'point_pelanggaran_rendah' => 30,
+                'point_pelanggaran_tinggi' => 30,
+            ],
+            [
+                'id_ketentuan_point' => 3,
+                'nama_ketentuan' => 'Penanganan Wali Kelas dan Guru BK diberikan hukuman Membersihkan Kelas',
+                'konsekuensi' => 'Penanganan Wali Kelas dan Guru BK diberikan hukuman Membersihkan Kelas',
+                'point_pelanggaran_rendah' => 40,
+                'point_pelanggaran_tinggi' => 40,
+            ],
+            [
+                'id_ketentuan_point' => 4,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 2, Tanda Tangan Surat Skorsing 3 hari dan Membersihkan Lingkungan Sekolah',
+                'konsekuensi' => 'Panggilan Orang Tua ke 2, Tanda Tangan Surat Skorsing 3 hari dan Membersihkan Lingkungan Sekolah',
                 'point_pelanggaran_rendah' => 50,
                 'point_pelanggaran_tinggi' => 50,
-                'konsekuensi' => 'Surat Pemanggilan orang tua 2 + Skorsing 5 hari + Setelah masuk membersihkan lingkungan sekolah selama 3 hari'
+            ],
+            [
+                'id_ketentuan_point' => 5,
+                'nama_ketentuan' => 'Panggilan Orang Tua ke 3 dan Tanda Tangan Surat Skorsing 1 minggu',
+                'konsekuensi' => 'Panggilan Orang Tua ke 3 dan Tanda Tangan Surat Skorsing 1 minggu',
+                'point_pelanggaran_rendah' => 80,
+                'point_pelanggaran_tinggi' => 80,
+            ],
+            [
+                'id_ketentuan_point' => 6,
+                'nama_ketentuan' => 'Dikembalikan ke Orang Tua',
+                'konsekuensi' => 'Dikembalikan ke Orang Tua',
+                'point_pelanggaran_rendah' => 100,
+                'point_pelanggaran_tinggi' => 100,
             ],
         ];
         $data['kelas']=list_kelas();

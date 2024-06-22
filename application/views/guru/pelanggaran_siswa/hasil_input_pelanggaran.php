@@ -48,8 +48,10 @@
                                         foreach ($ketentuan as $kp) {
                                             if ($s->jumlah_point >= $kp['point_pelanggaran_rendah'] and $s->jumlah_point <= $kp['point_pelanggaran_tinggi']) {
                                                 $ketentuana = $kp['nama_ketentuan'];
+                                                $konsekuensi = $kp['konsekuensi'];
                                             }else if($s->jumlah_point >= 500) {
                                                 $ketentuana = 'Dikembalikan ke orang tua ( Kepala Sekolah )';
+                                                $konsekuensi = 'Dikembalikan ke orang tua ( Kepala Sekolah )';
                                             }
                                         }
                                         ?>
@@ -57,7 +59,8 @@
                                         No Induk Siswa : <?php echo $s->no_induk; ?><br>
                                         Kelas Siswa : <?php echo $s->kelas; ?><br>
                                         Total Point Pelanggaran : <?php echo $s->jumlah_point; ?><br>
-                                        Keputusan Pelanggaran : <?php echo $ketentuana ?? '-'; ?>
+                                        Keputusan Pelanggaran : <?php echo $ketentuana ?? '-'; ?><br>
+                                        Konsekuensi : <?php echo $konsekuensi ?? '-'; ?>
                                     <?php } ?>
                                 </p>
                             </div>

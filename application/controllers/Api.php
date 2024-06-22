@@ -21,9 +21,41 @@ class Api extends CI_Controller{
         $this->db->order_by("id_surat", "DESC");
         $dataPemanggilan = $this->db->get()->row();
 
+        $ketentuan = [
+            [
+                'id_ketentuan_point' => 1,
+                'nama_ketentuan' => 'peringatan ke 1 ( oleh wali kelas )',
+                'point_pelanggaran_rendah' => 30,
+                'point_pelanggaran_tinggi' => 30,
+                'konsekuensi' => 'Surat Pemanggilan orang tua 1 + Skorsing 3 hari + Setelah masuk membersihkan lingkungan sekolah selama 2 hari'
+            ],
+            [
+                'id_ketentuan_point' => 2,
+                'nama_ketentuan' => 'peringatan ke 2 ( wali kelas dan K3 )',
+                'point_pelanggaran_rendah' => 50,
+                'point_pelanggaran_tinggi' => 50,
+                'konsekuensi' => 'Surat Pemanggilan orang tua 2 + Skorsing 5 hari + Setelah masuk membersihkan lingkungan sekolah selama 3 hari'
+            ],
+        ];
+
+        $konsekuensi = '';
+        $siswa=$this->m_point_pelanggaran->join_siswa_pelanggaran_custom($id)->result();
+        foreach ($siswa as $s) {
+            foreach ($ketentuan as $kp) {
+                if ($s->jumlah_point >= $kp['point_pelanggaran_rendah'] and $s->jumlah_point <= $kp['point_pelanggaran_tinggi']) {
+                    $ketentuana = $kp['nama_ketentuan'];
+                    $konsekuensi = $kp['konsekuensi'];
+                }else if($s->jumlah_point >= 500) {
+                    $ketentuana = 'Dikembalikan ke orang tua ( Kepala Sekolah )';
+                    $konsekuensi = 'Dikembalikan ke orang tua ( Kepala Sekolah )';
+                }
+            }
+        }
+
         $data = [
-            'jumlah_point' => $dataPoint->jumlah_point,
-            'id_surat' =>  $dataPemanggilan->id_surat ?? null
+            'jumlah_point' => $dataPoint->jumlah_point ?? 0,
+            'id_surat' =>  $dataPemanggilan->id_surat ?? null,
+            'konsekuensi' => $konsekuensi
         ];
 
         return $this->output

@@ -56,6 +56,14 @@
                                     $this->session->set_userdata('pesan', '');
                                     $this->session->set_userdata('jum_data', '');
                                     $this->session->set_userdata('nama_kelas', '');
+                                }elseif($this->session->userdata('pesan') == 'errNis') {
+                                    $pesan = "Terdapat No induk siswa yang sama";
+                                    $warna = "alert-danger";
+                                    $this->session->set_userdata('pesan', '');
+                                }elseif($this->session->userdata('pesan') == 'errUsernameOrtu') {
+                                    $pesan = "Terdapat Username orang tua yang sama";
+                                    $warna = "alert-danger";
+                                    $this->session->set_userdata('pesan', '');
                                 }
                             ?>
                                 <br>
@@ -258,7 +266,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">NIS :</label>
-                        <input type="text" class="form-control" id="nis" name="nis" required>
+                        <input type="text" class="form-control" id="nis" name="nis" disabled>
                     </div>
                     <div class="form-group">
                         <label for="email">Alamat :</label>
@@ -303,7 +311,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Username :</label>
-                        <input type="text" class="form-control" id="username_ortu" name="username_ortu" required>
+                        <input type="text" class="form-control" id="username_ortu" name="username_ortu" disabled>
                     </div>
                     <div class="form-group">
                         <label for="email">Password :</label>

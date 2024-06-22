@@ -52,6 +52,20 @@ class Siswa extends CI_Controller{
         $username_ortu=$this->input->post('username_ortu');
         $password_ortu=$this->input->post('password_ortu');
 
+        $cekNis = $this->db->query("SELECT * FROM siswa WHERE no_induk = '$nis'");
+        $cekNis = $cekNis->row();
+        if(!is_null($cekNis)) {
+            $this->session->set_userdata('pesan','errNis');
+            redirect('siswa');
+        }
+
+        $cekOrtu = $this->db->query("SELECT * FROM ortu WHERE username = '$username_ortu'");
+        $cekOrtu = $cekOrtu->row();
+        if(!is_null($cekOrtu)) {
+            $this->session->set_userdata('pesan','errUsernameOrtu');
+            redirect('siswa');
+        }
+
         $tanggal_input=date('Y-m-d H:i:s');
         $nilai=array(
             'id_siswa'=>'',
@@ -86,7 +100,6 @@ class Siswa extends CI_Controller{
     public function edit(){
         $id=$this->input->post('id_siswa');
         $nama=$this->input->post('nama');
-        $nis=$this->input->post('nis');
         $alamat=$this->input->post('alamat');
         $jenis_kelamin=$this->input->post('jenis_kelamin');
         $kelas=$this->input->post('kelas');
@@ -100,7 +113,6 @@ class Siswa extends CI_Controller{
 
         $nilai=array(
             'nama_siswa'=>$nama,
-            'no_induk'=>$nis,
             'alamat'=>$alamat,
             'jenis_kelamin'=>$jenis_kelamin,
             'kelas'=>$kelas,
@@ -115,7 +127,6 @@ class Siswa extends CI_Controller{
             'jenis_kelamin'=>$jenis_kelamin_ortu,
             'no_hp'=>$no_ortu,
             'alamat'=>$alamat_ortu,
-            'username'=>$username_ortu,
             'password'=>$password_ortu,
         );
         $this->m_point_pelanggaran->update('ortu',$nilai,$where);

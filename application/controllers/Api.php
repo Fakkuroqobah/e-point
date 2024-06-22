@@ -54,7 +54,7 @@ class Api extends CI_Controller{
 
         $data = [
             'jumlah_point' => $dataPoint->jumlah_point ?? 0,
-            'id_surat' =>  $dataPemanggilan->id_surat ?? null,
+            'id_surat' =>  $dataPemanggilan->id_surat ?? "",
             'konsekuensi' => $konsekuensi
         ];
 

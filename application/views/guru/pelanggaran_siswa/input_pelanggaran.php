@@ -26,6 +26,10 @@
                                 $pesan = "pelanggaran sudah terdaftar pada tanggal sekarang";
                                 $warna = "alert-success";
                                 $this->session->set_userdata('pesan', '');
+                            } elseif ($this->session->userdata('pesan') == 'errPoint') {
+                                $pesan = "Poin pelanggaran siswa tidak bisa lebih dari 100";
+                                $warna = "alert-danger";
+                                $this->session->set_userdata('pesan', '');
                             }
                         ?>
                                 <br>

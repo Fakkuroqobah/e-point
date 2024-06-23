@@ -4,7 +4,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Pelanggaran Siswa</h4>
+                        <h4 class="card-title">Proses Pelanggaran Siswa</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">

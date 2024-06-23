@@ -59,8 +59,7 @@
                                         No Induk Siswa : <?php echo $s->no_induk; ?><br>
                                         Kelas Siswa : <?php echo $s->kelas; ?><br>
                                         Total Point Pelanggaran : <?php echo $s->jumlah_point; ?><br>
-                                        Keputusan Pelanggaran : <?php echo $ketentuana ?? '-'; ?><br>
-                                        Konsekuensi : <?php echo $konsekuensi ?? '-'; ?>
+                                        Keputusan Pelanggaran : <?php echo $ketentuana ?? '-'; ?>
                                     <?php } ?>
                                 </p>
                             </div>

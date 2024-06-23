@@ -127,7 +127,17 @@ class Pelanggaran_siswa_guru extends CI_Controller{
         $point=$this->uri->segment('6');
 
         $cekPoint=$this->m_point_pelanggaran->join_siswa_pelanggaran_custom($id_siswa)->row();
-        if($cekPoint->jumlah_point + $point > 100) {
+        if($cekPoint->no_induk != '') {
+            if($cekPoint->jumlah_point + $point > 100) {
+                $nilai=array(
+                    'no_induk'=>'',
+                );
+                $where=array(
+                    'id_siswa'=>$id_siswa
+                );
+                $this->m_point_pelanggaran->update('siswa',$nilai,$where);
+            }
+        }else{
             $this->session->set_userdata('pesan','errPoint');
             redirect("pelanggaran_siswa_guru/input_pelanggaran/$id_siswa");
         }

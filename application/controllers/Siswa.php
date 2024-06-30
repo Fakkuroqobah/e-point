@@ -157,11 +157,32 @@ class Siswa extends CI_Controller{
 				$highestColumn = $worksheet->getHighestColumn();
 				for($row=3; $row<=$highestRow; $row++)
 				{
-					$nama_siswa = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
 					$no_induk = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+					$nama_siswa = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
 					$jenis_kelamin = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
 					$alamat = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-					$data[] = array(
+					$nama_ortu = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+					$jk_ortu = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+					$hp_ortu = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+					$alamat_ortu = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+					$username_ortu = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+					$password_ortu = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+
+                    $cekNis = $this->db->query("SELECT * FROM siswa WHERE no_induk = '$no_induk'");
+                    $cekNis = $cekNis->row();
+                    if(!is_null($cekNis)) {
+                        $this->session->set_userdata('pesan','errNis');
+                        redirect('siswa');
+                    }
+
+                    $cekOrtu = $this->db->query("SELECT * FROM ortu WHERE username = '$username_ortu'");
+                    $cekOrtu = $cekOrtu->row();
+                    if(!is_null($cekOrtu)) {
+                        $this->session->set_userdata('pesan','errUsernameOrtu');
+                        redirect('siswa');
+                    }
+
+					$nilai = array(
                         "id_siswa"=> '',
                         "nama_siswa"=>$nama_siswa,
                         'no_induk'=>$no_induk,
@@ -171,9 +192,23 @@ class Siswa extends CI_Controller{
                         'tanggal_input'=>date('Y-m-d H:i:s'),
                         'password'=>'password'
 					);
+                    $this->m_point_pelanggaran->insert('siswa',$nilai);
+
+                    $id_siswa = $this->db->query("SELECT * FROM siswa ORDER BY id_siswa DESC LIMIT 1");
+                    $id_siswa = $id_siswa->row();
+                    $nilai=array(
+                        'id_ortu'=>'',
+                        'id_siswa'=>$id_siswa->id_siswa,
+                        'nama_ortu'=>$nama_ortu,
+                        'jenis_kelamin'=>$jk_ortu,
+                        'no_hp'=>$hp_ortu,
+                        'alamat'=>$alamat_ortu,
+                        'username'=>$username_ortu,
+                        'password'=>$password_ortu,
+                    );
+                    $this->m_point_pelanggaran->insert('ortu',$nilai);
 				}
 			}
-            $this->m_point_pelanggaran->insert_siswa_import($data);
             $where_upload=array(
                 'kelas'=>$kelas,
             );
